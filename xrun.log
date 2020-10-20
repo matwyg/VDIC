@@ -1,0 +1,61 @@
+xrun: 19.09-s003: (c) Copyright 1995-2019 Cadence Design Systems, Inc.
+TOOL:	xrun	19.09-s003: Started on Oct 20, 2020 at 15:14:20 CEST
+xrun
+	+elaborate
+	+sv
+	-f /home/student/mwygrzywalski/VDIC/.dvt/lab00.build
+		-F lab00/sv.f
+			counter.sv
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmvlog: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+file: lab00/counter.sv
+	module worklib.counter:sv
+		errors: 0, warnings: 0
+	Total errors/warnings found outside modules and primitives:
+		errors: 0, warnings: 1
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmelab: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		counter
+xmelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmvlog_cg: *W,DLCVAR (../cds.lib,1): cds.lib Invalid environment variable ''.
+		worklib.counter:sv <0x23f024c5>
+			streams:   0, words:     0
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		        Instances  Unique
+		Modules:        1       1
+		Registers:      1       1
+		Always blocks:  1       1
+	Writing initial simulation snapshot: worklib.counter:sv
+TOOL:	xrun	19.09-s003: Exiting on Oct 20, 2020 at 15:14:20 CEST  (total: 00:00:00)

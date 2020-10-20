@@ -1,0 +1,5 @@
+//
+// File created by:  xrun
+// Do not modify this file
+
+s1::(20Oct2020:15:14:20):( xrun +elaborate +sv -f /home/student/mwygrzywalski/VDIC/.dvt/lab00.build )
