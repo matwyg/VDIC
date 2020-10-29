@@ -1,0 +1,92 @@
+*** Message Type: info ***
+When: Thu Oct 29 16:24:23 CET 2020
+SimVision started.
+Version: TOOL:  simvision       19.09-s003
+User: mwygrzywalski
+Host: localhost
+Platform: Linux/x86_64/2.6.32-754.33.1.el6.x86_64
+Started: Thu Oct 29 16:24:23 CET 2020
+Command: /cad/XCELIUM1909/tools.lnx86/simvision/bin/simvision.exe -connect dc:localhost:38999 -nocopyright
+Work Directory: /home/student/mwygrzywalski/VDIC/lab01
+ 
+*** Message Type: info ***
+When: Thu Oct 29 16:24:24 CET 2020
+Create browser window: "Design Browser 1"
+ 
+*** Message Type: info ***
+When: Thu Oct 29 16:24:27 CET 2020
+Create console window: "Console"
+ 
+*** Message Type: info ***
+When: Thu Oct 29 16:24:28 CET 2020
+Connect to Simulator
+      Design: worklib.mtm_Alu_tb:sv
+   Languages: verilog
+   Simulator: XM-Sim
+     Version: TOOL:      xmsim   19.09-s003
+        User: mwygrzywalski
+        Host: localhost
+Time Started: Thu Oct 29 16:24:22 CET 2020
+  Process ID: 84585
+   Directory: /home/student/mwygrzywalski/VDIC/lab01
+     Command: xrun -f tb.f -linedebug -debug -gui
+
+ 
+*** Message Type: info ***
+When: Thu Oct 29 16:24:28 CET 2020
+Create utility window: "Properties"
+ 
+*** Message Type: info ***
+When: Thu Oct 29 16:24:39 CET 2020
+Create waveform window: "Waveform 1"
+ 
+*** Message Type: info ***
+When: Thu Oct 29 16:24:52 CET 2020
+Delete waveform window: "Waveform 1"
+ 
+*** Message Type: info ***
+When: Thu Oct 29 16:24:54 CET 2020
+Exit XM-Sim: user
+      Design: worklib.mtm_Alu_tb:sv
+   Languages: verilog
+   Simulator: XM-Sim
+     Version: TOOL:      xmsim   19.09-s003
+        User: mwygrzywalski
+        Host: localhost
+Time Started: Thu Oct 29 16:24:22 CET 2020
+  Process ID: 84585
+   Directory: /home/student/mwygrzywalski/VDIC/lab01
+     Command: xrun -f tb.f -linedebug -debug -gui
+
+ 
+*** Message Type: error ***
+When: Thu Oct 29 16:24:54 CET 2020
+XM-Sim Crashed:
+      Design: worklib.mtm_Alu_tb:sv
+   Languages: verilog
+   Simulator: XM-Sim
+     Version: TOOL:      xmsim   19.09-s003
+        User: mwygrzywalski
+        Host: localhost
+Time Started: Thu Oct 29 16:24:22 CET 2020
+  Process ID: 84585
+   Directory: /home/student/mwygrzywalski/VDIC/lab01
+     Command: xrun -f tb.f -linedebug -debug -gui
+      Design: worklib.mtm_Alu_tb:sv
+   Languages: verilog
+   Simulator: XM-Sim
+     Version: TOOL: xmsim   19.09-s003
+        User: mwygrzywalski
+        Host: localhost
+Time Started: Thu Oct 29 16:24:22 CET 2020
+  Process ID: 84585
+   Directory: /home/student/mwygrzywalski/VDIC/lab01
+     Command: xrun -f tb.f -linedebug -debug -gui
+
+Outstanding STRAP Requests:
+        strap::report enable out
+ 
+*** Message Type: info ***
+When: Thu Oct 29 16:25:02 CET 2020
+SimVision Exit.
+ 
