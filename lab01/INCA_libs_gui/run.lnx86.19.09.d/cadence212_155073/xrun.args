@@ -2,9 +2,6 @@
 // File created by:  xrun
 // Do not modify this file
 //
--elaborate
--l
-xrun_elaborate.log
 -f
 dut.f
 -f
@@ -24,3 +21,7 @@ all
 -covoverwrite
 -covfile
 xrun_covfile.txt
+-covtest
+lab01
+-l
+xrun_gui.log
