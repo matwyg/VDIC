@@ -24,7 +24,6 @@ typedef enum bit[2:0] {
 	
 typedef enum bit [1:0] {DATA, CTL, ERR} byte_type_t;
 typedef enum bit {BYTE_OK, BYTE_BAD} byte_status_t;
-typedef enum bit {PROCESS_OK, PROCESS_BAD} process_status_t;
 	
 bit clk;
 bit rst_n;
@@ -46,57 +45,79 @@ mtm_Alu u_mtm_Alu (
 // Coverage block
 //------------------------------------------------------------------------------
 //initial begin : coverage
-	//bit [31:0] A;
+//bit [31:0] A;
 //	bit [31:0] B;
 //	bit [31:0] C;
 //	op_t op;
-//	process_status_t ps;
+
 //	bit [3:0] flags;
 //	bit [5:0] err_flags;
 	
 	// instantiate covergroups
 //	forever begin
-//		read_serial_sin(ps, A, B, op);
+//		read_serial_sin(A, B, op);
 		// sample covergroup;
 //		end
 	
 //end
 
+task read_serial_sout(
+	output byte_type_t bt,
+	output bit [31:0] C,
+	output bit [3:0] flags,
+	output bit [5:0] err_flags
+	);
+	bit [7:0] d;
+	bit [2:0] crc;
+	bit parity;
+	
+	read_byte(bt, d);
+	if(bt == DATA) begin
+		for(int i = 3; i>=0; i--)begin
+			read_byte(bt, d);
+			C[31:24] = d;
+			C = C>>8;
+		end
+	end 
+	else if (d[7] == 1'b0) begin
+		flags = d[6:3];
+		crc = d[2:0];
+		bt = DATA;
+	end
+	else begin
+		err_flags = d[6:1];
+		parity = d[0];
+		bt = ERR;
+	end
+endtask
+
 task read_serial_sin(
-	output process_status_t ps,
 	output bit [31:0] B,
 	output bit [31:0] A,
 	output op_t op
 	);
 	byte_type_t bt;
-	byte_status_t bs;
 	bit [7:0] d;
 	bit [2:0] op_bit;
 	bit [3:0] crc;
-	bit [3:0] calculated_crc;
 	// LOOP or
 	for(int i = 3; i>=0; i--)begin
-		read_byte(bs, bt, d);
+		read_byte(bt, d);
 		B[31:24] = d;
 		B = B>>8;
-		ps = ((bs == BYTE_OK) && (bt == DATA)) ? PROCESS_OK : PROCESS_BAD; 
 	end
 	for(int i = 3; i>=0; i--)begin
-		read_byte(bs, bt, d);
+		read_byte(bt, d);
 		A[31:24] = d;
-		A = A>>8;
-		ps = ((ps == PROCESS_OK) && (bs == BYTE_OK) && (bt == DATA)) ? PROCESS_OK : PROCESS_BAD; 
+		A = A>>8; 
 	end
-	read_byte(bs, bt, d);
+	read_byte(bt, d);
 	op_bit = d[6:4];
 	$cast(op, op_bit);
 	crc = d[3:0];
-	calculated_crc = crc4_generate(B, A, op_bit);
-	ps = ((ps == PROCESS_OK) && (bs == BYTE_OK) && (bt == CTL) && (crc == calculated_crc)) ? PROCESS_OK : PROCESS_BAD; 
 endtask
 
 task read_byte(
-		output byte_status_t bs,
 		output byte_type_t bt,
 		output bit [7:0] d);
 	
@@ -116,13 +137,6 @@ task read_byte(
 		for(int i = 7; i>=0; i--) begin
 			@(negedge clk) d[i] = sin;
 		end
-	end
-	@(negedge clk)
-	if(sin == 1) begin : read_stop_bit
-		bs = BYTE_OK;
-	end
-	else begin
-		bs = BYTE_BAD;
 	end
 endtask
 	
@@ -144,6 +158,23 @@ function [3:0] crc4_generate(
 	       crc4_generate = reminder;
 	end
 endfunction
+
+function bit [2:0] crc3_generate(
+input bit [31:0] C,
+input bit [3:0] flags);
+bit [39:0] crc_data;
+bit [2:0] reminder;
+   begin
+       crc_data = {C, {1'b0, flags, 3'b000}};
+       reminder = 0;
+       repeat(40)
+       begin
+           reminder = {reminder[1], reminder[2]^reminder[0], reminder[2]^crc_data[39]};
+           crc_data = {crc_data[38:0], 1'b0};
+       end
+       crc3_generate = reminder;
+   end
+endfunction
 //------------------------------------------------------------------------------
 // Clock generator
 //------------------------------------------------------------------------------
@@ -155,25 +186,48 @@ initial begin : clock_generator
 //------------------------------------------------------------------------------
 // Tester
 //------------------------------------------------------------------------------
+//---------------------------------
+// Random data generation functions
+//---------------------------------
+   function bit [31:0] get_data();
+      bit [3:0] zero_ones;
+      zero_ones = $random;
+      if (zero_ones == 4'b0000)
+        return 32'h0000_0000;
+      else if (zero_ones == 4'b1111)
+        return 32'hFFFF_FFFF;
+      else
+        return $random;
+   endfunction : get_data
+   
+  function op_t get_op();
+      bit [1:0] op_choice;
+      op_choice = $random;
+      case (op_choice)
+        2'b00 : return AND;
+        2'b01 : return OR;
+        2'b10 : return ADD;
+        2'b11 : return SUB;
+      endcase // case (op_choice)
+   endfunction : get_op
+   
 initial begin : tester
 	bit [31:0] B;
 	bit [31:0] A;
-	op_t op;
+	op_t op; 
 	
 	#20 rst_n = '1;
 	#30;
 	
-	//LOOP ...
-	// A =
-	// B =
-	// op =
-	B = 32'h33333333;
-	A = 32'h33333333;
-	op = ADD;
+	repeat (5) begin : tester_main
+	B = get_data();
+	A = get_data();
+	op = get_op();
 	send_cmd(B, A, op);
-	// ... END LOOP
+	end
 	
-	#2000 $finish;
+	#2000 rst_n = '1;
+	#30 $finish;
 end
 
 task send_cmd(
@@ -191,7 +245,7 @@ task send_cmd(
 	send_data_byte(A[23:16]);
 	send_data_byte(A[15:8]);
 	send_data_byte(A[7:0]);
-	send_ctl_byte({1'b0, op_bit, crc4_generate(B, A, op_bit)});
+	send_ctl_byte({1'b0, op, crc4_generate(B, A, op)});
 endtask
 
 task send_data_byte(input bit [7:0] d);

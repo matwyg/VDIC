@@ -37,10 +37,10 @@ if {[catch {window new WatchList -name "Design Browser 1" -geometry 636x500+0+31
 }
 window target "Design Browser 1" on
 browser using {Design Browser 1}
-browser set -scope  simulator::mtm_Alu_tb 
+browser set -scope  simulator::mtm_Alu_tb.u_mtm_Alu 
 browser set \
     -signalsort name
-browser yview see  simulator::mtm_Alu_tb 
+browser yview see  simulator::mtm_Alu_tb.u_mtm_Alu 
 browser timecontrol set -lock 0
 
 #
@@ -84,8 +84,17 @@ set id [waveform add -signals  {
 set id [waveform add -signals  {
 	simulator::mtm_Alu_tb.sout
 	} ]
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.u_mtm_Alu.error_core
+	} ]
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.u_mtm_Alu.output_valid_core
+	} ]
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.u_mtm_Alu.output_valid_des
+	} ]
 
-waveform xview limits 0 3030000ps
+waveform xview limits 0 7020000ps
 
 #
 # Waveform Window Links

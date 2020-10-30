@@ -45,5 +45,6 @@ alias . run
 alias quit exit
 database -open -shm -into waves.shm waves -default
 probe -create -database waves mtm_Alu_tb.clk mtm_Alu_tb.rst_n mtm_Alu_tb.sin mtm_Alu_tb.sout
+probe -create -database waves mtm_Alu_tb.u_mtm_Alu.error_core mtm_Alu_tb.u_mtm_Alu.output_valid_core mtm_Alu_tb.u_mtm_Alu.output_valid_des
 
 simvision -input /home/student/mwygrzywalski/VDIC/lab01/.simvision/155086_mwygrzywalski__autosave.tcl.svcf
