@@ -1,0 +1,139 @@
+
+#
+# Preferences
+#
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-sendToIndago-WaveWindow {
+  usual
+  position -pos 1
+}
+preferences set toolbar-Standard-Console {
+  usual
+  position -pos 1
+}
+preferences set toolbar-Search-Console {
+  usual
+  position -pos 2
+}
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 574x500+0+31}] != ""} {
+    window geometry "Design Browser 1" 574x500+0+31
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set -scope  simulator::mtm_Alu_tb.u_mtm_Alu 
+browser set \
+    -signalsort name
+browser yview see  simulator::mtm_Alu_tb.u_mtm_Alu 
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1010x600+520+31}] != ""} {
+    window geometry "Waveform 1" 1010x600+520+31
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ps \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.A_queue
+	} ]
+waveform format $id -trace analogSampleAndHold
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.B_queue
+	} ]
+waveform format $id -trace analogSampleAndHold
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.byte_status_t
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.byte_type_t
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.clk
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.op_queue
+	} ]
+waveform format $id -trace analogSampleAndHold
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.op_t
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.rst_n
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.sin
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.sout
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.u_mtm_Alu.error_core
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.u_mtm_Alu.output_valid_core
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	simulator::mtm_Alu_tb.u_mtm_Alu.output_valid_des
+	} ]
+waveform hierarchy set -scrollable 1 -expandtype dynarray $id
+set id [waveform add -signals  {
+	{simulator::mtm_Alu_tb.u_mtm_Alu.pout_core[39:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::mtm_Alu_tb.u_mtm_Alu.pout_des[8:0]}
+	} ]
+
+waveform xview limits 0 16980000ps
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 1536x707+0+31
+
+#
+# Layout selection
+#
