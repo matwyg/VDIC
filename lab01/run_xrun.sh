@@ -18,7 +18,7 @@ function main(){
   xrun_compile
   xrun_elaborate
   xrun_run_all_tests
-#  run_imc
+  run_imc
 }
 #------------------------------------------------------------------------------
 # local variables#<<<

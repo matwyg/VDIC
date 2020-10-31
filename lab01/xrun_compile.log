@@ -1,4 +1,4 @@
-TOOL:	xrun	19.09-s003: Started on Oct 31, 2020 at 20:46:20 CET
+TOOL:	xrun	19.09-s003: Started on Oct 31, 2020 at 23:12:27 CET
 xrun
 	-compile
 	-l xrun_compile.log
@@ -10,9 +10,7 @@ xrun
 	+nowarnDSEM2009
 	+nowarnDSEMEL
 	+nowarnCGDEFN
-	-xmlibdirname INCA_libs_gui
-	+access+r
-	+gui
+	-xmlibdirname INCA_libs
 	+overwrite
 	-nocopyright
 	-coverage all
@@ -43,8 +41,14 @@ file: mtm_Alu.vp
 		errors: 0, warnings: 0
 		errors: 0, warnings: 0
 file: mtm_Alu_tb.sv
+			assign op_set = op_set_bit;
+			                         |
+xmvlog: *W,ENUMERR (mtm_Alu_tb.sv,140|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+			assign op = op_bit;
+			                 |
+xmvlog: *W,ENUMERR (mtm_Alu_tb.sv,387|20): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
 	module worklib.mtm_Alu_tb:sv
-		errors: 0, warnings: 0
+		errors: 0, warnings: 2
 	Total errors/warnings found outside modules and primitives:
 		errors: 0, warnings: 1
 INCLUDE $PDK_DIR/cds/cds.lib
@@ -53,4 +57,4 @@ xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environ
 INCLUDE $PDK_DIR/cds/cds.lib
 |
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
-TOOL:	xrun	19.09-s003: Exiting on Oct 31, 2020 at 20:46:21 CET  (total: 00:00:01)
+TOOL:	xrun	19.09-s003: Exiting on Oct 31, 2020 at 23:12:28 CET  (total: 00:00:01)

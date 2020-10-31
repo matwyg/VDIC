@@ -1,0 +1,6 @@
+imc: *I,RUNLD: Successfully loaded run /home/student/mwygrzywalski/VDIC/lab01/cov_work/scope/merged_results.
+imc: *W,REPDEP: This is a legacy report and no future enhancement is planned for this report. It is recommended that you use the 'report_metrics' command and generate a dynamic report.
+name                                     Overall Average      Overall Covered      Code Average         Code Covered         Fsm Average          Fsm Covered          Functional Average   Functional Covered   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+mtm_Alu_tb                               93.68%               92.12% (269/292)     90.49%               91.50% (226/247)     n/a                  n/a                  96.88%               95.56% (43/45)       
+|--u_mtm_Alu                             94.64%               94.64% (53/56)       94.64%               94.64% (53/56)       n/a                  n/a                  n/a                  n/a                  

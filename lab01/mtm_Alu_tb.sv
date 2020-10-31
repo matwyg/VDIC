@@ -29,6 +29,11 @@ module mtm_Alu_tb();
 	bit [31:0] A_queue[$];
 	op_t op_queue[$];
 
+	bit [31:0] A;
+	bit [31:0] B;
+	bit [2:0] op_set_bit;
+	op_t op_set;
+
 	bit clk;
 	bit rst_n;
 	bit sin = 1;
@@ -48,24 +53,99 @@ module mtm_Alu_tb();
 //------------------------------------------------------------------------------
 // Coverage block
 //------------------------------------------------------------------------------
-//initial begin : coverage
-//bit [31:0] A;
-//  bit [31:0] B;
-//  bit [31:0] C;
-//  op_t op;
+	covergroup op_cov;
 
-//  bit [3:0] flags;
-//  bit [5:0] err_flags;
+		option.name = "cg_op_cov";
 
-	// instantiate covergroups
-//  forever begin
-//      read_serial_sin(A, B, op);
-	// sample covergroup;
-//      end
+		coverpoint op_set {
+			// #A1 test all operations
+			bins A1_all_op[] = {[AND : SUB]};
 
-//end
+			// #A2 test all operations after reset
+			bins A2_rst_opn[] = (rst_n => [AND : SUB]);
 
-	task read_serial_sout(
+			// #A3 test reset after all operations
+			bins A3_opn_rst[] = ([AND : SUB] => rst_n);
+
+			// #A6 two operations in row
+			bins A4_twoops[] = ([AND : SUB] [* 2]);
+		}
+	endgroup
+
+	covergroup zeros_or_ones_on_ops;
+
+		option.name = "cg_zeros_or_ones_on_ops";
+
+		all_ops : coverpoint op_set {
+			ignore_bins null_ops = {rst_n};
+		}
+
+		a_leg: coverpoint A {
+			bins zeros = {'h0000_0000};
+			bins others= {['h0000_0001:'hFFFF_FFFE]};
+			bins ones  = {'hFFFF_FFFF};
+		}
+
+		b_leg: coverpoint B {
+			bins zeros = {'h0000_0000};
+			bins others= {['h000_0001:'hFFFF_FFFE]};
+			bins ones  = {'hFFFF_FFFF};
+		}
+
+		B_op_00_FF:  cross a_leg, b_leg, all_ops {
+
+			// #B1 simulate all zero input for all the operations
+
+			bins B1_add_00 = binsof (all_ops) intersect {ADD} &&
+			(binsof (a_leg.zeros) || binsof (b_leg.zeros));
+
+			bins B1_and_00 = binsof (all_ops) intersect {AND} &&
+			(binsof (a_leg.zeros) || binsof (b_leg.zeros));
+
+			bins B1_or_00 = binsof (all_ops) intersect {OR} &&
+			(binsof (a_leg.zeros) || binsof (b_leg.zeros));
+
+			bins B1_sub_00 = binsof (all_ops) intersect {SUB} &&
+			(binsof (a_leg.zeros) || binsof (b_leg.zeros));
+
+			// #B2 simulate all one input for all the operations
+
+			bins B2_add_FF = binsof (all_ops) intersect {ADD} &&
+			(binsof (a_leg.ones) || binsof (b_leg.ones));
+
+			bins B2_and_FF = binsof (all_ops) intersect {AND} &&
+			(binsof (a_leg.ones) || binsof (b_leg.ones));
+
+			bins B2_or_FF = binsof (all_ops) intersect {OR} &&
+			(binsof (a_leg.ones) || binsof (b_leg.ones));
+
+			bins B2_sub_FF = binsof (all_ops) intersect {SUB} &&
+			(binsof (a_leg.ones) || binsof (b_leg.ones));
+
+			ignore_bins others_only =
+			binsof(a_leg.others) && binsof(b_leg.others);
+		}
+	endgroup
+
+	op_cov oc;
+	zeros_or_ones_on_ops c_00_FF;
+
+	initial begin : coverage
+		oc = new();
+		c_00_FF = new();
+
+		// instantiate covergroups
+		forever begin : sample_cov
+			read_serial_sin(A, B, op_set_bit);
+			assign op_set = op_set_bit;
+			@(negedge clk);
+			oc.sample();
+			c_00_FF.sample();
+		end
+
+	end
+
+	task automatic read_serial_sout(
 			output bit [31:0] C,
 			output bit [3:0] flags
 		);
@@ -82,13 +162,13 @@ module mtm_Alu_tb();
 		C[15:8] = d;
 		read_byte_sout(bt, d);
 		C[7:0] = d;
-		
+
 		read_byte_sout(bt, d);
 		flags = d[6:3];
 		crc = d[2:0];
 	endtask
 
-	task read_byte_sout(
+	task automatic read_byte_sout(
 			output byte_type_t bt,
 			output bit [7:0] d);
 
@@ -112,10 +192,10 @@ module mtm_Alu_tb();
 		@(negedge clk);
 	endtask
 
-	task read_serial_sin(
+	task automatic read_serial_sin(
 			output bit [31:0] B,
 			output bit [31:0] A,
-			output op_t op
+			output bit [2:0] op
 		);
 		byte_type_t bt;
 		bit [7:0] d;
@@ -130,7 +210,7 @@ module mtm_Alu_tb();
 		B[15:8] = d;
 		read_byte_sin(bt, d);
 		B[7:0] = d;
-		
+
 		read_byte_sin(bt, d);
 		A[31:24] = d;
 		read_byte_sin(bt, d);
@@ -141,12 +221,12 @@ module mtm_Alu_tb();
 		A[7:0] = d;
 
 		read_byte_sin(bt, d);
-		op_bit = d[6:4];
-		$cast(op, op_bit);
+		op = d[6:4];
+		//$cast(op, op_bit);
 		crc = d[3:0];
 	endtask
 
-	task read_byte_sin(
+	task automatic read_byte_sin(
 			output byte_type_t bt,
 			output bit [7:0] d);
 
@@ -220,11 +300,11 @@ module mtm_Alu_tb();
 // Random data generation functions
 //---------------------------------
 	function bit [31:0] get_data();
-		bit [3:0] zero_ones;
+		bit [2:0] zero_ones;
 		zero_ones = $random;
-		if (zero_ones == 4'b0000)
+		if (zero_ones == 3'b000)
 			return 32'h0000_0000;
-		else if (zero_ones == 4'b1111)
+		else if (zero_ones == 3'b111)
 			return 32'hFFFF_FFFF;
 		else
 			return $random;
@@ -297,22 +377,25 @@ module mtm_Alu_tb();
 
 // odczytaj sin (initial + forever + read_serial_sin)
 // -> i wkladam odczytane dane w SV fifo
-	initial
+	initial begin
 		forever begin
 			bit [31:0] B;
 			bit [31:0] A;
+			bit [2:0] op_bit;
 			op_t op;
-			read_serial_sin(B, A, op);
+			read_serial_sin(B, A, op_bit);
+			assign op = op_bit;
 			B_queue.push_back(B);
 			A_queue.push_back(A);
 			op_queue.push_back(op);
 		end
+	end
 
 // odczytaj sout (initial + forever + read_serial_sout)
 // sprawdz wynik i porównaj z ostatnim elementem fifo
 	initial
-		begin
-			#70
+	begin
+		#70
 		forever begin
 			bit [31:0] C;
 			bit [3:0] flags;
@@ -333,12 +416,12 @@ module mtm_Alu_tb();
 			emulate_alu(B, A, op, C_expected, flags_expected);
 			if ((C_expected != C) && (flags_expected != flags))begin
 				$display("FAILED: B: %0h  A: %0h op: %s C: %0h", B, A, op.name(), C);
-			end 
+			end
 			else begin
 				$display("PASSED: B: %0h  A: %0h op: %s C: %0h", B, A, op.name(), C);
 			end
 		end
-		end
+	end
 
 	function void emulate_alu(
 			input bit [31:0] B,

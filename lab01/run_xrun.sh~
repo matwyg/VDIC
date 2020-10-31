@@ -18,7 +18,7 @@ function main(){
   xrun_compile
   xrun_elaborate
   xrun_run_all_tests
-  run_imc
+#  run_imc
 }
 #------------------------------------------------------------------------------
 # local variables#<<<
@@ -44,6 +44,7 @@ separator=`perl -e "print \"#\" x $cols"`
 #------------------------------------------------------------------------------
 # simulator arguments #<<<
 XRUN_ARGS="\
+  -f dut.f \
   -f tb.f \
   -v93 \
   +nowarnDSEM2009 \

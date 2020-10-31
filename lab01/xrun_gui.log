@@ -1,4 +1,4 @@
-TOOL:	xrun	19.09-s003: Started on Oct 31, 2020 at 20:55:35 CET
+TOOL:	xrun	19.09-s003: Started on Oct 31, 2020 at 23:08:56 CET
 xrun
 	-f dut.f
 		mtm_Alu.vp
@@ -32,8 +32,8 @@ INCLUDE $PDK_DIR/cds/cds.lib
 |
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 Recompiling... reason: file './mtm_Alu_tb.sv' is newer than expected.
-	expected: Sat Oct 31 20:54:42 2020
-	actual:   Sat Oct 31 20:55:24 2020
+	expected: Sat Oct 31 22:10:12 2020
+	actual:   Sat Oct 31 23:08:30 2020
 INCLUDE $PDK_DIR/cds/cds.lib
 |
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
@@ -41,8 +41,14 @@ INCLUDE $PDK_DIR/cds/cds.lib
 |
 xmvlog: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 file: mtm_Alu_tb.sv
+			assign op_set = op_set_bit;
+			                         |
+xmvlog: *W,ENUMERR (mtm_Alu_tb.sv,140|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+			assign op = op_bit;
+			                 |
+xmvlog: *W,ENUMERR (mtm_Alu_tb.sv,387|20): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
 	module worklib.mtm_Alu_tb:sv
-		errors: 0, warnings: 0
+		errors: 0, warnings: 2
 	Total errors/warnings found outside modules and primitives:
 		errors: 0, warnings: 1
 INCLUDE $PDK_DIR/cds/cds.lib
@@ -63,29 +69,46 @@ xmelab: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid envir
 		worklib.mtm_Alu
 		worklib.mtm_Alu_tb
 	Total FSMs extracted = 0
-	Building instance overlay tables: .................... Done
+	Building instance overlay tables: ....
+			assign op_set = op_set_bit;
+			                         |
+xmelab: *W,ENUMERR (./mtm_Alu_tb.sv,140|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+			assign op = op_bit;
+			                 |
+xmelab: *W,ENUMERR (./mtm_Alu_tb.sv,387|20): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+................ Done
 	Enabling instrumentation for coverage types: block expression FSM toggle functional
 	Generating native compiled code:
 INCLUDE $PDK_DIR/cds/cds.lib
 |
 xmvlog_cg: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
-		worklib.mtm_Alu_tb:sv <0x0d1858f5>
-			streams:  19, words: 37324
+		worklib.mtm_Alu_tb:sv <0x6eb76746>
+			streams:  27, words: 43523
 	bit [31:0] B_queue[$];
 	                 |
 xmelab: *W,COVUTA (./mtm_Alu_tb.sv,28|18): Toggle coverage is not supported for SystemVerilog integer, real, string, dynamic array, sparse memory and reference ports. It is also not supported for VHDL multi-dimensional array and array of record. There may also be other such objects in the design.
 	Building instance specific data structures.
 	Performing constant object marking (COM) analysis.
+			bins A2_rst_opn[] = (rst_n => [AND : SUB]);
+			                         |
+xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,65|28): Bin value type mismatch with coverpoint type.
+			bins A3_opn_rst[] = ([AND : SUB] => rst_n);
+			                                        |
+xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,68|43): Bin value type mismatch with coverpoint type.
+			ignore_bins null_ops = {rst_n};
+			                            |
+xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,80|31): Bin value type mismatch with coverpoint type.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                 Instances  Unique
 		Modules:                 5       5
-		Registers:             123     123
+		Registers:             128     128
 		Scalar wires:            7       -
 		Vectored wires:          2       -
 		Always blocks:          12      12
-		Initial blocks:          5       5
-		Pseudo assignments:      1       1
+		Initial blocks:          6       6
+		Pseudo assignments:      2       2
+		Covergroup Instances:    0       2
 		Simulation timescale:  1ps
 	Writing initial simulation snapshot: worklib.mtm_Alu_tb:sv
 INCLUDE $PDK_DIR/cds/cds.lib
@@ -601,5 +624,20 @@ PASSED: B: 27e9ed4f  A: 32238b64 op: AND C: 22218944
 PASSED: B: 4d7a999a  A: dcc8c8b9 op: OR C: ddfad9bb
 PASSED: B: d84fb2b0  A: 749ab7e9 op: AND C: 500ab2a0
 Simulation complete via $finish(1) at time 497070 NS + 0
-./mtm_Alu_tb.sv:260 		#30 $finish;
-xcelium> 
+./mtm_Alu_tb.sv:340 		#30 $finish;
+xcelium> ^C
+xcelium> exit
+...Regained control from SimVision
+-------------------------------------
+See ./cov_work/scope/lab01/icc.com file for message(s) on coverage constant object marking
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  mtm_Alu_tb(mtm_Alu_tb)
+  scope    :  scope
+  testname :  lab01
+
+coverage files:
+  model(design data) :  ./cov_work/scope/icc_48d5e285_3bc78873.ucm
+  data               :  ./cov_work/scope/lab01/icc_48d5e285_3bc78873.ucd
+TOOL:	xrun	19.09-s003: Exiting on Oct 31, 2020 at 23:09:33 CET  (total: 00:00:37)
