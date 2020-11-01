@@ -1,4 +1,4 @@
-TOOL:	xrun	19.09-s003: Started on Nov 01, 2020 at 18:35:28 CET
+TOOL:	xrun	19.09-s003: Started on Nov 01, 2020 at 23:33:34 CET
 xrun
 	-elaborate
 	-l xrun_elaborate.log
@@ -10,9 +10,7 @@ xrun
 	+nowarnDSEM2009
 	+nowarnDSEMEL
 	+nowarnCGDEFN
-	-xmlibdirname INCA_libs_gui
-	+access+r
-	+gui
+	-xmlibdirname INCA_libs
 	+overwrite
 	-nocopyright
 	-coverage all
@@ -60,43 +58,34 @@ xmelab: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid envir
 	Building instance overlay tables: ....
 			assign op_set = op_set_bit;
 			                         |
-xmelab: *W,ENUMERR (./mtm_Alu_tb.sv,142|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+xmelab: *W,ENUMERR (./mtm_Alu_tb.sv,150|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
 ................ Done
 	Enabling instrumentation for coverage types: block expression FSM toggle functional
 	Generating native compiled code:
 INCLUDE $PDK_DIR/cds/cds.lib
 |
 xmvlog_cg: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
-			streams:   7, words:  4287
-			streams:   9, words: 28418
-			streams:   7, words:  3741
-		worklib.mtm_Alu_tb:sv <0x0c4f0bf3>
-			streams:  27, words: 52771
+			streams:   7, words:  3972
+			streams:   9, words: 25661
+			streams:   7, words:  3321
+		worklib.mtm_Alu_tb:sv <0x1ac6c50b>
+			streams:  27, words: 54065
 	bit [31:0] B_queue[$];
 	                 |
 xmelab: *W,COVUTA (./mtm_Alu_tb.sv,28|18): Toggle coverage is not supported for SystemVerilog integer, real, string, dynamic array, sparse memory and reference ports. It is also not supported for VHDL multi-dimensional array and array of record. There may also be other such objects in the design.
 	Building instance specific data structures.
 	Performing constant object marking (COM) analysis.
-			bins A2_rst_opn[] = (rst_n => [AND : SUB]);
-			                         |
-xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,67|28): Bin value type mismatch with coverpoint type.
-			bins A3_opn_rst[] = ([AND : SUB] => rst_n);
-			                                        |
-xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,70|43): Bin value type mismatch with coverpoint type.
-			ignore_bins null_ops = {rst_n};
-			                            |
-xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,82|31): Bin value type mismatch with coverpoint type.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                 Instances  Unique
 		Modules:                 5       5
-		Registers:             141     141
+		Registers:             139     139
 		Scalar wires:            7       -
 		Vectored wires:          2       -
 		Always blocks:          12      12
 		Initial blocks:          6       6
-		Pseudo assignments:      2       2
-		Covergroup Instances:    0       2
+		Pseudo assignments:      1       1
+		Covergroup Instances:    0       3
 		Simulation timescale:  1ps
 	Writing initial simulation snapshot: worklib.mtm_Alu_tb:sv
-TOOL:	xrun	19.09-s003: Exiting on Nov 01, 2020 at 18:35:28 CET  (total: 00:00:00)
+TOOL:	xrun	19.09-s003: Exiting on Nov 01, 2020 at 23:33:35 CET  (total: 00:00:01)

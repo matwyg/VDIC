@@ -63,14 +63,8 @@ module mtm_Alu_tb();
 			// #A1 test all operations
 			bins A1_all_op[] = {[AND : SUB]};
 
-			// #A2 test all operations after reset
-			bins A2_rst_opn[] = (rst_n => [AND : SUB]);
-
-			// #A3 test reset after all operations
-			bins A3_opn_rst[] = ([AND : SUB] => rst_n);
-
-			// #A6 two operations in row
-			bins A4_twoops[] = ([AND : SUB] [* 2]);
+			// #A2 two operations in row
+			bins A2_twoops[] = ([AND : SUB] [* 2]);
 		}
 	endgroup
 
@@ -79,7 +73,7 @@ module mtm_Alu_tb();
 		option.name = "cg_zeros_or_ones_on_ops";
 
 		all_ops : coverpoint op_set {
-			ignore_bins null_ops = {rst_n};
+			bins A1_all_op[] = {[AND : SUB]};
 		}
 
 		a_leg: coverpoint A {
@@ -129,12 +123,26 @@ module mtm_Alu_tb();
 		}
 	endgroup
 
+	covergroup err_resp;
+
+		option.name = "cg_err_resp";
+
+		coverpoint err_flags {
+			// #A1 test all operations
+			bins data_err = {3'b100};
+			bins crc_err = {3'b010};
+		//bins op_err = {3'b001};
+		}
+	endgroup
+
 	op_cov oc;
 	zeros_or_ones_on_ops c_00_FF;
+	err_resp err;
 
 	initial begin : coverage
 		oc = new();
 		c_00_FF = new();
+		err = new();
 
 		// instantiate covergroups
 		forever begin : sample_cov
@@ -143,6 +151,7 @@ module mtm_Alu_tb();
 			@(negedge clk);
 			oc.sample();
 			c_00_FF.sample();
+			err.sample();
 		end
 
 	end
@@ -251,7 +260,7 @@ module mtm_Alu_tb();
 		end
 		else if (crc != crc4_generate(B, A, op)) begin
 			err_flags = 3'b010;
-		end 
+		end
 		else if (d[5] == 1'b1) begin
 			err_flags = 3'b001;
 		end
@@ -332,25 +341,18 @@ module mtm_Alu_tb();
 //---------------------------------
 // Random data generation functions
 //---------------------------------
-	function bit [31:0] get_data();
-		bit [2:0] zero_ones;
-		zero_ones = $random;
-		if (zero_ones == 3'b000)
-			return 32'h0000_0000;
-		else if (zero_ones == 3'b111)
-			return 32'hFFFF_FFFF;
-		else
-			return $random;
-	endfunction : get_data
-
 	function op_t get_op();
-		bit [1:0] op_choice;
+		bit [2:0] op_choice;
 		op_choice = $random;
 		case (op_choice)
-			2'b00 : return AND;
-			2'b01 : return OR;
-			2'b10 : return ADD;
-			2'b11 : return SUB;
+			3'b000 : return AND;
+			3'b001 : return OR;
+			3'b010 : return ADD;
+			3'b011 : return SUB;
+			3'b100 : return AND;
+			3'b101 : return OR;
+			3'b110 : return ADD;
+			3'b111 : return SUB;
 		endcase // case (op_choice)
 	endfunction : get_op
 
@@ -373,10 +375,38 @@ module mtm_Alu_tb();
 
 		#20 rst_n = '1;
 		#30;
+		
+		repeat (50) begin : tester_00_FF
+			B = 32'd0;
+			A = 32'd0;
+			op = get_op();
+			send_cmd(B, A, op, 3'b000);
+		end
+		
+		repeat (50) begin : tester_00_FF_2
+			B = 32'hFFFF_FFFF;
+			A = 32'd0;
+			op = get_op();
+			send_cmd(B, A, op, 3'b000);
+		end
+		
+		repeat (50) begin : tester_00_FF_3
+			B = 32'd0;
+			A = 32'hFFFF_FFFF;
+			op = get_op();
+			send_cmd(B, A, op, 3'b000);
+		end
+				
+		repeat (50) begin : tester_00_FF_4
+			B = 32'hFFFF_FFFF;
+			A = 32'hFFFF_FFFF;
+			op = get_op();
+			send_cmd(B, A, op, 3'b000);
+		end
 
 		repeat (100) begin : tester_main
-			B = get_data();
-			A = get_data();
+			B = $random;
+			A = $random;
 			op = get_op();
 			err_flags = get_err_flags();
 			send_cmd(B, A, op, err_flags);

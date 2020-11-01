@@ -1,4 +1,4 @@
-TOOL:	xrun	19.09-s003: Started on Nov 01, 2020 at 22:47:10 CET
+TOOL:	xrun	19.09-s003: Started on Nov 01, 2020 at 23:05:41 CET
 xrun
 	-f dut.f
 		mtm_Alu.vp
@@ -32,8 +32,8 @@ INCLUDE $PDK_DIR/cds/cds.lib
 |
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 Recompiling... reason: file './mtm_Alu_tb.sv' is newer than expected.
-	expected: Sun Nov  1 22:39:47 2020
-	actual:   Sun Nov  1 22:46:58 2020
+	expected: Sun Nov  1 22:48:54 2020
+	actual:   Sun Nov  1 23:05:17 2020
 INCLUDE $PDK_DIR/cds/cds.lib
 |
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
@@ -43,7 +43,7 @@ xmvlog: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid envir
 file: mtm_Alu_tb.sv
 			assign op_set = op_set_bit;
 			                         |
-xmvlog: *W,ENUMERR (mtm_Alu_tb.sv,142|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+xmvlog: *W,ENUMERR (mtm_Alu_tb.sv,150|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
 	module worklib.mtm_Alu_tb:sv
 		errors: 0, warnings: 1
 	Total errors/warnings found outside modules and primitives:
@@ -69,29 +69,23 @@ xmelab: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid envir
 	Building instance overlay tables: ....
 			assign op_set = op_set_bit;
 			                         |
-xmelab: *W,ENUMERR (./mtm_Alu_tb.sv,142|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+xmelab: *W,ENUMERR (./mtm_Alu_tb.sv,150|28): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
 ................ Done
 	Enabling instrumentation for coverage types: block expression FSM toggle functional
 	Generating native compiled code:
 INCLUDE $PDK_DIR/cds/cds.lib
 |
 xmvlog_cg: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
-		worklib.mtm_Alu_tb:sv <0x47f0ba5e>
-			streams:  27, words: 55055
+		worklib.mtm_Alu_tb:sv <0x49605516>
+			streams:  29, words: 56334
 	bit [31:0] B_queue[$];
 	                 |
 xmelab: *W,COVUTA (./mtm_Alu_tb.sv,28|18): Toggle coverage is not supported for SystemVerilog integer, real, string, dynamic array, sparse memory and reference ports. It is also not supported for VHDL multi-dimensional array and array of record. There may also be other such objects in the design.
 	Building instance specific data structures.
 	Performing constant object marking (COM) analysis.
-			bins A2_rst_opn[] = (rst_n => [AND : SUB]);
-			                         |
-xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,67|28): Bin value type mismatch with coverpoint type.
-			bins A3_opn_rst[] = ([AND : SUB] => rst_n);
-			                                        |
-xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,70|43): Bin value type mismatch with coverpoint type.
 			ignore_bins null_ops = {rst_n};
 			                            |
-xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,82|31): Bin value type mismatch with coverpoint type.
+xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,76|31): Bin value type mismatch with coverpoint type.
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                 Instances  Unique
@@ -102,7 +96,7 @@ xmelab: *W,CUVBVE (./mtm_Alu_tb.sv,82|31): Bin value type mismatch with coverpoi
 		Always blocks:          12      12
 		Initial blocks:          6       6
 		Pseudo assignments:      2       2
-		Covergroup Instances:    0       2
+		Covergroup Instances:    0       3
 		Simulation timescale:  1ps
 	Writing initial simulation snapshot: worklib.mtm_Alu_tb:sv
 INCLUDE $PDK_DIR/cds/cds.lib
@@ -418,5 +412,18 @@ PASSED: B: 671030c  A: 6a1a61d4  op: 0  err_flags: 10  C: 0  flags: 0
 EXPECTED: err_flags: 10  C: 0  flags: 0 
 
 Simulation complete via $finish(1) at time 101070 NS + 0
-./mtm_Alu_tb.sv:386 		#30 $finish;
-xcelium> 
+./mtm_Alu_tb.sv:395 		#30 $finish;
+xcelium> ^C
+xcelium> exit
+See ./cov_work/scope/lab01/icc.com file for message(s) on coverage constant object marking
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  mtm_Alu_tb(mtm_Alu_tb)
+  scope    :  scope
+  testname :  lab01
+
+coverage files:
+  model(design data) :  ./cov_work/scope/icc_268c4f31_41ad5696.ucm
+  data               :  ./cov_work/scope/lab01/icc_268c4f31_41ad5696.ucd
+TOOL:	xrun	19.09-s003: Exiting on Nov 01, 2020 at 23:06:07 CET  (total: 00:00:26)
