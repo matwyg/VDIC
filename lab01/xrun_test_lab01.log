@@ -1,4 +1,4 @@
-TOOL:	xrun	19.09-s003: Started on Oct 31, 2020 at 23:12:28 CET
+TOOL:	xrun	19.09-s003: Started on Oct 31, 2020 at 23:45:09 CET
 xrun
 	-f dut.f
 		mtm_Alu.vp
@@ -557,4 +557,4 @@ coverage setup:
 coverage files:
   model(design data) :  ./cov_work/scope/icc_1455f652_3bc78873.ucm
   data               :  ./cov_work/scope/lab01/icc_1455f652_3bc78873.ucd
-TOOL:	xrun	19.09-s003: Exiting on Oct 31, 2020 at 23:12:29 CET  (total: 00:00:01)
+TOOL:	xrun	19.09-s003: Exiting on Oct 31, 2020 at 23:45:09 CET  (total: 00:00:00)

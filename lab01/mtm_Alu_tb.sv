@@ -27,12 +27,14 @@ module mtm_Alu_tb();
 
 	bit [31:0] B_queue[$];
 	bit [31:0] A_queue[$];
-	op_t op_queue[$];
+	bit [2:0] op_queue[$];
+	bit [2:0] err_flags_queue[$];
 
 	bit [31:0] A;
 	bit [31:0] B;
 	bit [2:0] op_set_bit;
 	op_t op_set;
+	bit [2:0] err_flags;
 
 	bit clk;
 	bit rst_n;
@@ -136,7 +138,7 @@ module mtm_Alu_tb();
 
 		// instantiate covergroups
 		forever begin : sample_cov
-			read_serial_sin(A, B, op_set_bit);
+			read_serial_sin(A, B, op_set_bit, err_flags);
 			assign op_set = op_set_bit;
 			@(negedge clk);
 			oc.sample();
@@ -147,25 +149,35 @@ module mtm_Alu_tb();
 
 	task automatic read_serial_sout(
 			output bit [31:0] C,
-			output bit [3:0] flags
+			output bit [3:0] flags,
+			output bit [2:0] err_flags
 		);
 		byte_type_t bt;
 		bit [7:0] d;
 		bit [2:0] crc;
-		bit parity;
+		//bit parity;
 
 		read_byte_sout(bt, d);
-		C[31:24] = d;
-		read_byte_sout(bt, d);
-		C[23:16] = d;
-		read_byte_sout(bt, d);
-		C[15:8] = d;
-		read_byte_sout(bt, d);
-		C[7:0] = d;
+		if((bt == DATA) || (bt == CTL)) begin
+			C[31:24] = d;
+			read_byte_sout(bt, d);
+			C[23:16] = d;
+			read_byte_sout(bt, d);
+			C[15:8] = d;
+			read_byte_sout(bt, d);
+			C[7:0] = d;
 
-		read_byte_sout(bt, d);
-		flags = d[6:3];
-		crc = d[2:0];
+			read_byte_sout(bt, d);
+			flags = d[6:3];
+			crc = d[2:0];
+			err_flags = 3'b000;
+		end
+		else begin
+			C[31:0] = 32'd0;
+			err_flags = d[6:4];
+			flags = 4'b0000;
+			crc = 3'b000;
+		end
 	endtask
 
 	task automatic read_byte_sout(
@@ -184,9 +196,19 @@ module mtm_Alu_tb();
 			end
 		end
 		else begin : read_ctl_byte
-			bt = CTL;
-			for(int i = 7; i>=0; i--) begin
-				@(negedge clk) d[i] = sout;
+			@(negedge clk);
+			d[7] = sout;
+			if(sout == 0) begin
+				bt = CTL;
+				for(int i = 6; i>=0; i--) begin
+					@(negedge clk) d[i] = sout;
+				end
+			end
+			else begin
+				bt = ERR;
+				for(int i = 6; i>=0; i--) begin
+					@(negedge clk) d[i] = sout;
+				end
 			end
 		end
 		@(negedge clk);
@@ -195,7 +217,8 @@ module mtm_Alu_tb();
 	task automatic read_serial_sin(
 			output bit [31:0] B,
 			output bit [31:0] A,
-			output bit [2:0] op
+			output bit [2:0] op,
+			output bit [2:0] err_flags
 		);
 		byte_type_t bt;
 		bit [7:0] d;
@@ -222,8 +245,18 @@ module mtm_Alu_tb();
 
 		read_byte_sin(bt, d);
 		op = d[6:4];
-		//$cast(op, op_bit);
 		crc = d[3:0];
+		if(bt == DATA) begin
+			err_flags = 3'b100;
+		end
+		else if (crc != crc4_generate(B, A, op)) begin
+			err_flags = 3'b010;
+		end 
+		else if (d[5] == 1'b1) begin
+			err_flags = 3'b001;
+		end
+	//$cast(op, op_bit);
+
 	endtask
 
 	task automatic read_byte_sin(
@@ -321,19 +354,32 @@ module mtm_Alu_tb();
 		endcase // case (op_choice)
 	endfunction : get_op
 
+	function [2:0] get_err_flags();
+		bit [2:0] err_choice;
+		err_choice = $random;
+		case (err_choice)
+			3'b000 : return 3'b001;
+			3'b001 : return 3'b010;
+			3'b010 : return 3'b100;
+			default : return 3'b000;
+		endcase
+	endfunction
+
 	initial begin : tester
 		bit [31:0] B;
 		bit [31:0] A;
 		op_t op;
+		bit [2:0] err_flags;
 
 		#20 rst_n = '1;
 		#30;
 
-		repeat (500) begin : tester_main
+		repeat (100) begin : tester_main
 			B = get_data();
 			A = get_data();
 			op = get_op();
-			send_cmd(B, A, op);
+			err_flags = get_err_flags();
+			send_cmd(B, A, op, err_flags);
 		end
 
 		#2000 rst_n = '1;
@@ -343,19 +389,57 @@ module mtm_Alu_tb();
 	task send_cmd(
 			input bit [31:0] B,
 			input bit [31:0] A,
-			input op_t op
+			input op_t op,
+			input bit [2:0] err_flags
 		);
 		bit [2:0] op_bit;
 		$cast(op_bit, op);
-		send_data_byte(B[31:24]);
-		send_data_byte(B[23:16]);
-		send_data_byte(B[15:8]);
-		send_data_byte(B[7:0]);
-		send_data_byte(A[31:24]);
-		send_data_byte(A[23:16]);
-		send_data_byte(A[15:8]);
-		send_data_byte(A[7:0]);
-		send_ctl_byte({1'b0, op, crc4_generate(B, A, op)});
+		case(err_flags)
+			default: begin
+				send_data_byte(B[31:24]);
+				send_data_byte(B[23:16]);
+				send_data_byte(B[15:8]);
+				send_data_byte(B[7:0]);
+				send_data_byte(A[31:24]);
+				send_data_byte(A[23:16]);
+				send_data_byte(A[15:8]);
+				send_data_byte(A[7:0]);
+				send_ctl_byte({1'b0, op, crc4_generate(B, A, op)});
+			end
+			3'b100: begin
+				send_data_byte(B[31:24]);
+				send_data_byte(B[23:16]);
+				send_data_byte(B[15:8]);
+				send_data_byte(B[7:0]);
+				send_data_byte(A[31:24]);
+				send_data_byte(A[23:16]);
+				send_data_byte(A[15:8]);
+				send_data_byte(A[7:0]);
+				send_data_byte(A[7:0]);
+			end
+			3'b010: begin
+				send_data_byte(B[31:24]);
+				send_data_byte(B[23:16]);
+				send_data_byte(B[15:8]);
+				send_data_byte(B[7:0]);
+				send_data_byte(A[31:24]);
+				send_data_byte(A[23:16]);
+				send_data_byte(A[15:8]);
+				send_data_byte(A[7:0]);
+				send_ctl_byte({1'b0, op, (crc4_generate(B, A, op)+1)});
+			end
+			3'b001: begin
+				send_data_byte(B[31:24]);
+				send_data_byte(B[23:16]);
+				send_data_byte(B[15:8]);
+				send_data_byte(B[7:0]);
+				send_data_byte(A[31:24]);
+				send_data_byte(A[23:16]);
+				send_data_byte(A[15:8]);
+				send_data_byte(A[7:0]);
+				send_ctl_byte({1'b0, 3'b010, crc4_generate(B, A, op)});
+			end
+		endcase
 	endtask
 
 	task send_data_byte(input bit [7:0] d);
@@ -382,12 +466,14 @@ module mtm_Alu_tb();
 			bit [31:0] B;
 			bit [31:0] A;
 			bit [2:0] op_bit;
-			op_t op;
-			read_serial_sin(B, A, op_bit);
-			assign op = op_bit;
+			bit [2:0] err_flags;
+
+			read_serial_sin(B, A, op_bit, err_flags);
+
 			B_queue.push_back(B);
 			A_queue.push_back(A);
-			op_queue.push_back(op);
+			op_queue.push_back(op_bit);
+			err_flags_queue.push_back(err_flags);
 		end
 	end
 
@@ -397,28 +483,34 @@ module mtm_Alu_tb();
 	begin
 		#70
 		forever begin
+			bit [31:0] B;
+			bit [31:0] A;
+			bit [2:0] op_bit;
+			bit [2:0] err_flags_in;
+
 			bit [31:0] C;
 			bit [3:0] flags;
+			bit [2:0] err_flags_out;
 
 			bit [31:0] C_expected;
 			bit [3:0] flags_expected;
+			bit [2:0] err_flags_expected;
 
-			bit [31:0] B;
-			bit [31:0] A;
-			op_t op;
-
-			read_serial_sout(C, flags);
+			read_serial_sout(C, flags, err_flags_out);
 
 			B = B_queue.pop_front();
 			A = A_queue.pop_front();
-			op = op_queue.pop_front();
+			op_bit = op_queue.pop_front();
+			err_flags_in = err_flags_queue.pop_front();
 
-			emulate_alu(B, A, op, C_expected, flags_expected);
-			if ((C_expected != C) && (flags_expected != flags))begin
-				$display("FAILED: B: %0h  A: %0h op: %s C: %0h", B, A, op.name(), C);
+			emulate_alu(B, A, op_bit, err_flags_in, C_expected, flags_expected, err_flags_expected);
+			if ((C_expected == C) && (flags_expected == flags) && (err_flags_expected == err_flags_out))begin
+				$display("PASSED: B: %0h  A: %0h  op: %0b  err_flags: %0b  C: %0h  flags: %0b", B, A, op_bit, err_flags_out, C, flags);
+				$display("EXPECTED: err_flags: %0b  C: %0h  flags: %0b \n", err_flags_expected, C_expected, flags_expected);
 			end
 			else begin
-				$display("PASSED: B: %0h  A: %0h op: %s C: %0h", B, A, op.name(), C);
+				$display("FAILED: B: %0h  A: %0h  op: %0b  err_flags: %0b  C: %0h  flags: %0b", B, A, op_bit, err_flags_out, C, flags);
+				$display("EXPECTED: err_flags: %0b  C: %0h  flags: %0b \n", err_flags_expected, C_expected, flags_expected);
 			end
 		end
 	end
@@ -426,24 +518,36 @@ module mtm_Alu_tb();
 	function void emulate_alu(
 			input bit [31:0] B,
 			input bit [31:0] A,
-			input op_t op,
+			input bit [2:0] op_bit,
+			input bit [2:0] err_flags_in,
 			output bit [31:0] C,
-			output bit [3:0] flags);
+			output bit [3:0] flags,
+			output bit [2:0] err_flags);
 
 		reg cout;
-		begin
-			case(op)
-				AND: {cout, C} = {1'b0, B} & {1'b0, A};
-				OR: {cout, C} = {1'b0, B} | {1'b0, A};
-				ADD: {cout, C} = {1'b0, B} + {1'b0, A};
-				SUB: {cout, C} = {1'b0, B} - {1'b0, A};
-			//default: {cout, C} = {1'b0, C};
-			endcase
-			flags[3] = cout;
-			flags[2] = (B[31]&&A[31]&&(!C[31]))||((!B[31])&&(!A[31])&&(C[31]));
-			flags[1] = (C==0);
-			flags[0] = C[31];
-		end
+		err_flags = err_flags_in;
+		case(err_flags_in)
+			default:
+			begin
+				C = 32'd0;
+				flags = 4'b0000;
+			end
+
+			3'b000:
+			begin
+				case(op_bit)
+					3'b000: {cout, C} = {1'b0, B} & {1'b0, A};
+					3'b001: {cout, C} = {1'b0, B} | {1'b0, A};
+					3'b100: {cout, C} = {1'b0, B} + {1'b0, A};
+					3'b101: {cout, C} = {1'b0, B} - {1'b0, A};
+					default: {cout, C} = {1'b0, 32'd0};
+				endcase
+				flags[3] = cout;
+				flags[2] = (B[31]&&A[31]&&(!C[31]))||((!B[31])&&(!A[31])&&(C[31]));
+				flags[1] = (C==0);
+				flags[0] = C[31];
+			end
+		endcase
 	endfunction
 
 endmodule
