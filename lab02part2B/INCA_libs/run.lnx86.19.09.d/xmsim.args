@@ -1,0 +1,38 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
++incdir+tb_classes
++incdir+.
++nowarnDSEM2009
++nowarnDSEMEL
++nowarnCGDEFN
+-amsdlibdir
+./INCA_libs/AMSD
+-NOWARN
+DSEM2009
+-NOWARN
+DSEMEL
+-NOWARN
+CGDEFN
+-NOCOPYRIGHT
+-COVOVERWRITE
+-COVTEST
+lab02A
+-MESSAGES
++EMGRLOG
+xrun_test_lab02A.log
+-XLSTIME
+1607189178
+-XLKEEP
+-XLMODE
+./INCA_libs/run.lnx86.19.09.d
+-RUNMODE
+-CDSLIB
+./INCA_libs/run.lnx86.19.09.d/cds.lib
+-HDLVAR
+./INCA_libs/run.lnx86.19.09.d/hdl.var
+-XLNAME
+xrun
+-XLVERSION
+"TOOL:	xrun	19.09-s003"

@@ -1,0 +1,64 @@
+TOOL:	xrun	19.09-s003: Started on Dec 05, 2020 at 18:26:18 CET
+xrun
+	-compile
+	-l xrun_compile.log
+	-f dut.f
+		mtm_Alu.vp
+	-f tb.f
+		mtm_Alu_pkg.sv
+		mtm_Alu_bfm.sv
+		top.sv
+		+incdir+tb_classes
+		+incdir+.
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	-xmlibdirname INCA_libs
+	+overwrite
+	-nocopyright
+	-coverage all
+	-covoverwrite
+	-covfile xrun_covfile.txt
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmvlog: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+file: mtm_Alu.vp
+	module worklib.mtm_Alu:vp
+		errors: 0, warnings: 0
+		errors: 0, warnings: 0
+		errors: 0, warnings: 0
+		errors: 0, warnings: 0
+file: mtm_Alu_pkg.sv
+	package worklib.mtm_Alu_pkg:sv
+		errors: 0, warnings: 0
+file: mtm_Alu_bfm.sv
+	interface worklib.mtm_Alu_bfm:sv
+		errors: 0, warnings: 0
+file: top.sv
+	module worklib.top:sv
+		errors: 0, warnings: 0
+	Total errors/warnings found outside modules and primitives:
+		errors: 0, warnings: 1
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+TOOL:	xrun	19.09-s003: Exiting on Dec 05, 2020 at 18:26:18 CET  (total: 00:00:00)
