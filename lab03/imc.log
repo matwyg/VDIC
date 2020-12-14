@@ -1,0 +1,11 @@
+imc: *I,RUNLD: Successfully loaded run /home/student/mwygrzywalski/VDIC/lab03/cov_work/scope/merged_results.
+imc: *W,REPDEP: This is a legacy report and no future enhancement is planned for this report. It is recommended that you use the 'report_metrics' command and generate a dynamic report.
+name                                     Overall Average      Overall Covered      Code Average         Code Covered         Fsm Average          Fsm Covered          Functional Average   Functional Covered   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uvm_pkg                                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+|--uvm_test_top                          n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+| |--env_h                               n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+| | |--coverage_h                        100.00%              100.00% (40/40)      n/a                  n/a                  n/a                  n/a                  100.00%              100.00% (40/40)      
+top                                      100.00%              100.00% (2/2)        100.00%              100.00% (2/2)        n/a                  n/a                  n/a                  n/a                  
+|--bfm                                   58.08%               54.21% (103/190)     58.08%               54.21% (103/190)     n/a                  n/a                  n/a                  n/a                  
+|--DUT                                   96.43%               96.43% (54/56)       96.43%               96.43% (54/56)       n/a                  n/a                  n/a                  n/a                  

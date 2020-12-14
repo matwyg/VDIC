@@ -1,0 +1,234 @@
+TOOL:	xrun	19.09-s003: Started on Dec 14, 2020 at 20:32:08 CET
+xrun
+	-elaborate
+	-l xrun_elaborate.log
+	-f dut.f
+		tinyalu_dut/single_cycle_add_and_xor.vhd
+		tinyalu_dut/three_cycle_mult.vhd
+		tinyalu_dut/tinyalu.vhd
+	-f tb.f
+		tinyalu_pkg.sv
+		tinyalu_bfm.sv
+		top.sv
+		+incdir+tb_classes
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	+nowarnXCLGNOPTM
+	+nowarnRNDXCELON
+	-xmlibdirname INCA_libs
+	+overwrite
+	-nocopyright
+	-coverage all
+	-covoverwrite
+	-covfile xrun_covfile.txt
+	-uvm
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+
+   User defined plus("+") options:
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmelab: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+		Caching library 'worklib' ....... Done
+	Top level design units:
+		uvm_pkg
+		cdns_uvmapi
+		cdns_assert2uvm_pkg
+		cdns_uvm_pkg
+		tinyalu_pkg
+		top
+    obj = new(name, parent);
+      |
+xmelab: *W,CNIABE (/cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_registry.svh,66|6): Abstract (virtual) class 'base_tester' cannot be instantiated, detected while elaborating:
+	'class uvm_pkg::uvm_component_registry#(.T(class tinyalu_pkg::base_tester),.Tname("base_tester"))' from './tb_classes/base_tester.svh' line 29.
+This is a warning for backward compatibility; it will be upgraded to an error in future releases.
+
+	Extracting FSMs for coverage:
+		WORKLIB.single_cycle:add_and_xor
+		WORKLIB.three_cycle:mult
+		WORKLIB.tinyalu:rtl
+		worklib.top
+	Total FSMs extracted = 0
+	Building instance overlay tables: .................... Done
+	Enabling instrumentation for coverage types: block expression FSM toggle functional
+	Generating native compiled code:
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmvhdl_cg: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmvlog_cg: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+		worklib.uvm_pkg:sv <0x6e64f271>
+			streams:   8, words:  5814
+		worklib.uvm_pkg:sv <0x3ca0c90c>
+			streams:   8, words:  5584
+		worklib.uvm_pkg:sv <0x546b807b>
+			streams:   7, words:  5133
+		worklib.uvm_pkg:sv <0x28559710>
+			streams:   7, words:  1570
+		worklib.uvm_pkg:sv <0x2f3b1226>
+			streams:   8, words:  2228
+		worklib.uvm_pkg:sv <0x678bea70>
+			streams:  22, words: 43143
+		worklib.uvm_pkg:sv <0x309ae805>
+			streams:   7, words:  1570
+		worklib.uvm_pkg:sv <0x129dad99>
+			streams:   7, words:  2594
+		worklib.uvm_pkg:sv <0x096a732c>
+			streams:   7, words:  2594
+		worklib.uvm_pkg:sv <0x46cf544a>
+			streams:   9, words:  3716
+		worklib.uvm_pkg:sv <0x05b62bdf>
+			streams:  28, words: 21024
+		worklib.uvm_pkg:sv <0x2a373d18>
+			streams:  27, words: 19973
+		worklib.uvm_pkg:sv <0x0747a2f7>
+			streams:  23, words: 19569
+		worklib.uvm_pkg:sv <0x4265f506>
+			streams:  14, words:  4745
+		worklib.uvm_pkg:sv <0x79fc455e>
+			streams:  26, words: 28039
+		worklib.uvm_pkg:sv <0x270b1144>
+			streams:   7, words:  2024
+		worklib.uvm_pkg:sv <0x468c7e6c>
+			streams:  14, words: 12393
+		worklib.uvm_pkg:sv <0x5a6fcb5a>
+			streams:  26, words: 23604
+		worklib.uvm_pkg:sv <0x1dddbe23>
+			streams:  25, words: 43149
+		worklib.uvm_pkg:sv <0x57463310>
+			streams:  27, words: 26024
+		worklib.uvm_pkg:sv <0x58f69aa1>
+			streams:  26, words: 37660
+		worklib.uvm_pkg:sv <0x476fc33c>
+			streams:  27, words: 27995
+		worklib.uvm_pkg:sv <0x4dc80e26>
+			streams:  25, words: 39775
+		worklib.uvm_pkg:sv <0x7bee4b6b>
+			streams:  27, words: 29668
+		worklib.uvm_pkg:sv <0x01eabb79>
+			streams:  25, words: 45069
+		worklib.uvm_pkg:sv <0x3d87f69f>
+			streams:  27, words: 33431
+		worklib.uvm_pkg:sv <0x30816d7f>
+			streams:  25, words: 40467
+		worklib.uvm_pkg:sv <0x67d4124c>
+			streams:  25, words: 43060
+		worklib.uvm_pkg:sv <0x2456f274>
+			streams:  27, words: 27634
+		worklib.uvm_pkg:sv <0x66bcc3ef>
+			streams:  25, words: 39493
+		worklib.uvm_pkg:sv <0x479dc50b>
+			streams:  28, words: 63201
+		worklib.uvm_pkg:sv <0x30e8d983>
+			streams:  59, words: 62638
+		worklib.cdns_uvm_pkg:sv <0x4d6db01c>
+			streams:  27, words: 28908
+		worklib.cdns_uvm_pkg:sv <0x45440965>
+			streams:   8, words:  3157
+		worklib.cdns_uvm_pkg:sv <0x12e621f6>
+			streams:  10, words:  7215
+		worklib.uvm_pkg:sv <0x1d3f6686>
+			streams:  24, words: 15353
+		worklib.uvm_pkg:sv <0x6dbbccf1>
+			streams:  24, words: 15353
+		worklib.uvm_pkg:sv <0x0a5a2409>
+			streams:   7, words:  2594
+		worklib.uvm_pkg:sv <0x639003f1>
+			streams:  23, words: 15546
+		worklib.uvm_pkg:sv <0x18e3f738>
+			streams:  28, words: 22858
+		worklib.uvm_pkg:sv <0x0ea17ef6>
+			streams:  24, words: 21748
+		worklib.uvm_pkg:sv <0x2c8930bc>
+			streams:  23, words: 14206
+		worklib.tinyalu_pkg:sv <0x6135692d>
+			streams:  24, words: 15036
+		worklib.tinyalu_pkg:sv <0x46ec3eb5>
+			streams:  26, words: 20641
+		worklib.top:sv <0x5bb7f0f9>
+			streams:  72, words: 78559
+		worklib.tinyalu_bfm:sv <0x615c6cc8>
+			streams:   4, words: 17235
+		worklib.tinyalu_pkg:sv <0x04ba7e77>
+			streams:   0, words:     0
+		worklib.cdns_uvm_pkg:sv <0x46b4771c>
+			streams: 134, words: 203840
+		worklib.cdns_uvmapi:svp <0x2807e146>
+			streams:  27, words: 25915
+		worklib.cdns_assert2uvm_pkg:sv <0x6d3f9017>
+			streams:   3, words:  1845
+		worklib.uvm_pkg:sv <0x7235d21a>
+			streams: 4440, words: 5801830
+	Enabling instrumentation for coverage types: block expression FSM toggle functional
+INCLUDE $PDK_DIR/cds/cds.lib
+|
+xmvhdl_cg: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+	Building instance specific data structures.
+	Performing constant object marking (COM) analysis.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                       Instances  Unique
+	VHDL Design hierarchy:
+		Components:                    3       3
+		Processes:                     9       9
+		Signals:                      16      16
+	Verilog Design hierarchy:
+		Modules:                       1       1
+		Interfaces:                    1       1
+		Verilog packages:              5       5
+		Registers:                 13291   10145
+		Scalar wires:                  3       -
+		Expanded wires:               19       3
+		Named events:                  4      12
+		Initial blocks:              276     154
+		Parallel blocks:              26      27
+		Cont. assignments:             1       1
+		Pseudo assignments:            5       5
+		Assertions:                    2       2
+		Covergroup Instances:          0       2
+		SV Class declarations:       197     311
+		SV Class specializations:    357     357
+		Simulation timescale:        1ps
+	Writing initial simulation snapshot: worklib.top:sv
+TOOL:	xrun	19.09-s003: Exiting on Dec 14, 2020 at 20:32:12 CET  (total: 00:00:04)

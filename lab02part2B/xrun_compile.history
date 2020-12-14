@@ -1,1 +1,1 @@
-s1(05Dec2020:18:26:18):  xrun -compile -l xrun_compile.log -f dut.f -f tb.f -v93 +nowarnDSEM2009 +nowarnDSEMEL +nowarnCGDEFN -xmlibdirname INCA_libs +overwrite -nocopyright -coverage all -covoverwrite -covfile xrun_covfile.txt 
+s1(12Dec2020:16:28:37):  xrun -compile -l xrun_compile.log -f dut.f -f tb.f -v93 +nowarnDSEM2009 +nowarnDSEMEL +nowarnCGDEFN -xmlibdirname INCA_libs +overwrite -nocopyright -coverage all -covoverwrite -covfile xrun_covfile.txt 

@@ -1,0 +1,32 @@
+*I,RUNLD: Successfully loaded run /home/student/mwygrzywalski/VDIC/lab03/lab03_example_2020/cov_work/scope/add_test.
+*I,MERGL1: Merging Simulation Coverage ...
+----------------------------
+*I,MERGL1: Preparing target model ...
+*I,MERGL1: Reading model of primary run (cov_work/scope/random_test) as initial model: cov_work/scope/icc_270c2a3e_1f046401.ucm
+*I,MERGL1: Target model generated successfully.
+*I,MERGL1: Projecting Simulation ucd data into the target model ...
+*I,MERGL2:   cov_work/scope/random_test:
+*I,MERGL3:       Data is projected in to the target model.
+*I,MERGL2:   cov_work/scope/add_test:
+*I,MERGL3:       Data is projected in to the target model.
+*I,MERGL1: Writing output database cov_work/scope/merged_results:
+*I,MERGL2:   Model: cov_work/scope/merged_results/icc_270c2a3e_1f046401.ucm
+*I,MERGL2:   Data : cov_work/scope/merged_results/icc_270c2a3e_1f046401.ucd
+*I,MERGL1: No Specman coverage databases found in the runs.
+Total conflicts during target model creation: 0
+Total items not merged                      : 0
+Total runs not considered during target model creation: 0
+Total runs not merged                                 : 0
+*I,RUNLD: Successfully loaded run /home/student/mwygrzywalski/VDIC/lab03/lab03_example_2020/cov_work/scope/merged_results.
+*W,REPDEP: This is a legacy report and no future enhancement is planned for this report. It is recommended that you use the 'report_metrics' command and generate a dynamic report.
+name                                     Overall Average      Overall Covered      Code Average         Code Covered         Fsm Average          Fsm Covered          Functional Average   Functional Covered   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uvm_pkg                                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+|--uvm_test_top                          n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+| |--env_h                               n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+| | |--coverage_h                        100.00%              100.00% (58/58)      n/a                  n/a                  n/a                  n/a                  100.00%              100.00% (58/58)      
+top                                      100.00%              100.00% (2/2)        100.00%              100.00% (2/2)        n/a                  n/a                  n/a                  n/a                  
+|--bfm                                   100.00%              100.00% (71/71)      100.00%              100.00% (71/71)      n/a                  n/a                  n/a                  n/a                  
+|--DUT                                   95.39%               92.05% (81/88)       95.39%               92.05% (81/88)       n/a                  n/a                  n/a                  n/a                  
+| |--add_and_xor                         94.17%               91.36% (74/81)       94.17%               91.36% (74/81)       n/a                  n/a                  n/a                  n/a                  
+| |--mult                                98.25%               99.11% (111/112)     98.25%               99.11% (111/112)     n/a                  n/a                  n/a                  n/a                  

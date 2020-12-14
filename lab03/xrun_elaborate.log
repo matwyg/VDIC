@@ -1,0 +1,181 @@
+TOOL:	xrun	19.09-s003: Started on Dec 14, 2020 at 20:36:30 CET
+xrun
+	-elaborate
+	-l xrun_elaborate.log
+	-f dut.f
+		mtm_Alu.vp
+	-f tb.f
+		mtm_Alu_pkg.sv
+		mtm_Alu_bfm.sv
+		top.sv
+		+incdir+tb_classes
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	+nowarnXCLGNOPTM
+	+nowarnRNDXCELON
+	-xmlibdirname INCA_libs
+	+overwrite
+	-nocopyright
+	-coverage all
+	-covoverwrite
+	-covfile xrun_covfile.txt
+	-uvm
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+
+   User defined plus("+") options:
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		uvm_pkg
+		cdns_uvmapi
+		cdns_assert2uvm_pkg
+		cdns_uvm_pkg
+		mtm_Alu_pkg
+		top
+    obj = new(name, parent);
+      |
+xmelab: *W,CNIABE (/cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_registry.svh,66|6): Abstract (virtual) class 'base_tester' cannot be instantiated, detected while elaborating:
+	'class uvm_pkg::uvm_component_registry#(.T(class mtm_Alu_pkg::base_tester),.Tname("base_tester"))' from './tb_classes/base_tester.svh' line 16.
+This is a warning for backward compatibility; it will be upgraded to an error in future releases.
+
+	Extracting FSMs for coverage:
+		worklib.mtm_Alu
+		worklib.top
+	Total FSMs extracted = 0
+	Building instance overlay tables: .................... Done
+	Enabling instrumentation for coverage types: block expression FSM toggle functional
+	Generating native compiled code:
+			streams:   7, words:  3972
+			streams:   9, words: 25661
+			streams:   7, words:  3321
+		worklib.uvm_pkg:sv <0x7a16104a>
+			streams:   8, words:  5696
+		worklib.uvm_pkg:sv <0x56941ad4>
+			streams:   8, words:  5468
+		worklib.uvm_pkg:sv <0x48d28fae>
+			streams:   7, words:  5029
+		worklib.uvm_pkg:sv <0x463339d4>
+			streams:   7, words:  1505
+		worklib.uvm_pkg:sv <0x24fda975>
+			streams:   8, words:  2144
+		worklib.uvm_pkg:sv <0x3260de9a>
+			streams:  22, words: 42172
+		worklib.uvm_pkg:sv <0x69e7e760>
+			streams:   7, words:  1505
+		worklib.uvm_pkg:sv <0x1542bf7b>
+			streams:   7, words:  2494
+		worklib.uvm_pkg:sv <0x2fbc644a>
+			streams:   7, words:  2494
+		worklib.uvm_pkg:sv <0x74d7a5b1>
+			streams:   9, words:  3597
+		worklib.uvm_pkg:sv <0x15cc3ba8>
+			streams:  28, words: 20537
+		worklib.uvm_pkg:sv <0x7e65d1bb>
+			streams:  27, words: 19508
+		worklib.uvm_pkg:sv <0x3d041cdf>
+			streams:  23, words: 19113
+		worklib.uvm_pkg:sv <0x28953639>
+			streams:  14, words:  4567
+		worklib.uvm_pkg:sv <0x4b605ae0>
+			streams:  26, words: 27426
+		worklib.uvm_pkg:sv <0x40369aa8>
+			streams:   7, words:  1944
+		worklib.uvm_pkg:sv <0x27c3b242>
+			streams:  14, words: 12074
+		worklib.uvm_pkg:sv <0x60d5e4f3>
+			streams:  26, words: 22997
+		worklib.uvm_pkg:sv <0x07d8b87f>
+			streams:  25, words: 42088
+		worklib.uvm_pkg:sv <0x6a538fd5>
+			streams:  27, words: 25337
+		worklib.uvm_pkg:sv <0x4702e1bd>
+			streams:  26, words: 36821
+		worklib.uvm_pkg:sv <0x33e9b69b>
+			streams:  27, words: 27296
+		worklib.uvm_pkg:sv <0x31ffa5ad>
+			streams:  25, words: 38900
+		worklib.uvm_pkg:sv <0x1b94f792>
+			streams:  27, words: 28920
+		worklib.uvm_pkg:sv <0x4c1c2426>
+			streams:  25, words: 44022
+		worklib.uvm_pkg:sv <0x2935d2ce>
+			streams:  27, words: 32537
+		worklib.uvm_pkg:sv <0x5f09b661>
+			streams:  25, words: 39636
+		worklib.uvm_pkg:sv <0x76b3a38a>
+			streams:  25, words: 42190
+		worklib.uvm_pkg:sv <0x757d4e75>
+			streams:  27, words: 26894
+		worklib.uvm_pkg:sv <0x3533ce2f>
+			streams:  25, words: 38605
+		worklib.uvm_pkg:sv <0x35c451e4>
+			streams:  28, words: 62252
+		worklib.uvm_pkg:sv <0x7510bb64>
+			streams:  59, words: 61232
+		worklib.cdns_uvm_pkg:sv <0x6a3f6bba>
+			streams:  27, words: 28602
+		worklib.cdns_uvm_pkg:sv <0x19aa725e>
+			streams:   8, words:  3059
+		worklib.cdns_uvm_pkg:sv <0x2d4ce1cd>
+			streams:  10, words:  7067
+		worklib.uvm_pkg:sv <0x2fa170fa>
+			streams:  24, words: 14907
+		worklib.uvm_pkg:sv <0x1922269b>
+			streams:  24, words: 14907
+		worklib.uvm_pkg:sv <0x38bc2e2b>
+			streams:   7, words:  2494
+		worklib.uvm_pkg:sv <0x12a76f69>
+			streams:  23, words: 15103
+		worklib.uvm_pkg:sv <0x1148518d>
+			streams:  30, words: 24491
+		worklib.uvm_pkg:sv <0x536b6646>
+			streams:  25, words: 19045
+		worklib.uvm_pkg:sv <0x35611894>
+			streams:  23, words: 13966
+		worklib.mtm_Alu_pkg:sv <0x4bd1260b>
+			streams:  25, words: 14789
+		worklib.mtm_Alu_pkg:sv <0x35387dcf>
+			streams:  27, words: 20478
+		worklib.top:sv <0x0194e723>
+			streams:  70, words: 76671
+		worklib.mtm_Alu_bfm:sv <0x15f55278>
+			streams:  14, words: 63658
+		worklib.mtm_Alu_pkg:sv <0x32a178d8>
+			streams:   0, words:     0
+		worklib.cdns_uvm_pkg:sv <0x646a7529>
+			streams: 134, words: 201094
+		worklib.cdns_uvmapi:svp <0x11654b1a>
+			streams:  27, words: 25320
+		worklib.cdns_assert2uvm_pkg:sv <0x23f4d7db>
+			streams:   3, words:  1805
+		worklib.uvm_pkg:sv <0x469caf1e>
+			streams: 4440, words: 5679277
+	Building instance specific data structures.
+	Performing constant object marking (COM) analysis.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                       Instances  Unique
+		Modules:                       5       5
+		Interfaces:                    1       1
+		Verilog packages:              5       5
+		Registers:                 13413   10273
+		Scalar wires:                  7       -
+		Vectored wires:                2       -
+		Named events:                  4      12
+		Always blocks:                12      12
+		Initial blocks:              277     155
+		Parallel blocks:              26      27
+		Pseudo assignments:            3       3
+		Assertions:                    2       2
+		Covergroup Instances:          0       3
+		SV Class declarations:       197     311
+		SV Class specializations:    357     357
+		Simulation timescale:        1ps
+	Writing initial simulation snapshot: worklib.top:sv
+TOOL:	xrun	19.09-s003: Exiting on Dec 14, 2020 at 20:36:34 CET  (total: 00:00:04)

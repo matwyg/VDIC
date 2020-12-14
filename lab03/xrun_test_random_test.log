@@ -1,0 +1,94 @@
+TOOL:	xrun	19.09-s003: Started on Dec 14, 2020 at 20:36:34 CET
+xrun
+	-f dut.f
+		mtm_Alu.vp
+	-f tb.f
+		mtm_Alu_pkg.sv
+		mtm_Alu_bfm.sv
+		top.sv
+		+incdir+tb_classes
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	+nowarnXCLGNOPTM
+	+nowarnRNDXCELON
+	-xmlibdirname INCA_libs
+	+overwrite
+	-nocopyright
+	-coverage all
+	-covoverwrite
+	-covfile xrun_covfile.txt
+	-uvm
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+	-covtest random_test
+	-l xrun_test_random_test.log
+	+UVM_TESTNAME=random_test
+
+   User defined plus("+") options:
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+
+Loading snapshot worklib.top:sv .................... Done
+SVSEED default: 1
+xcelium> source /cad/XCELIUM1909/tools/xcelium/files/xmsimrc
+xcelium> source /cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/additions/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+----------------------------------------------------------------
+CDNS-UVM-1.1d (19.09-s003)
+(C) 2007-2013 Mentor Graphics Corporation
+(C) 2007-2013 Cadence Design Systems, Inc.
+(C) 2006-2013 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+----------------------------------------------------------------
+UVM_INFO @ 0: reporter [RNTST] Running test random_test...
+UVM_INFO @ 0: reporter [UVMTOP] UVM testbench topology:
+--------------------------------------------
+Name              Type           Size  Value
+--------------------------------------------
+uvm_test_top      random_test    -     @2625
+  env_h           env            -     @2686
+    coverage_h    coverage       -     @2749
+    scoreboard_h  scoreboard     -     @2782
+    tester_h      random_tester  -     @2719
+--------------------------------------------
+
+UVM_INFO /cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_objection.svh(1268) @ 198020000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    3
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[TEST_DONE]     1
+[UVMTOP]     1
+Simulation complete via $finish(1) at time 198020 NS + 45
+/cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_root.svh:457     $finish;
+xcelium> exit
+See ./cov_work/scope/random_test/icc.com file for message(s) on coverage constant object marking
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  top(top)
+  scope    :  scope
+  testname :  random_test
+
+coverage files:
+  model(design data) :  ./cov_work/scope/icc_2bde63fc_1b95fb75.ucm
+  data               :  ./cov_work/scope/random_test/icc_2bde63fc_1b95fb75.ucd
+TOOL:	xrun	19.09-s003: Exiting on Dec 14, 2020 at 20:36:34 CET  (total: 00:00:00)

@@ -1,0 +1,22 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
++NoArgsToLog
+-NOWARN
+DSEM2009
+-NOWARN
+DSEMEL
+-NOWARN
+CGDEFN
+-NOWARN
+XCLGNOPTM
+-NOWARN
+RNDXCELON
+-NOCOPYRIGHT
+-COVERAGE
+all
+-COVOVERWRITE
+-COVTEST
+add_test
+-UPDATE

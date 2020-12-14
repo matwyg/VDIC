@@ -1,0 +1,57 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-INPUT
+"@source /cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/additions/sv/files/tcl/uvm_sim.tcl"
++UVM_NO_RELNOTES
++UVM_VERBOSITY=MEDIUM
++incdir+tb_classes
++nowarnDSEM2009
++nowarnDSEMEL
++nowarnCGDEFN
++nowarnXCLGNOPTM
++nowarnRNDXCELON
+-amsdlibdir
+./INCA_libs/AMSD
+-uvmhome
+/cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d
+-sv_lib
+/cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmpli.so
+-NOWARN
+DSEM2009
+-NOWARN
+DSEMEL
+-NOWARN
+CGDEFN
+-NOWARN
+XCLGNOPTM
+-NOWARN
+RNDXCELON
+-NOCOPYRIGHT
+-COVOVERWRITE
+-COVTEST
+add_test
++UVM_TESTNAME=add_test
+-MESSAGES
+-RUN
+-SV_LIB
+/cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmdpi.so
++EMGRLOG
+xrun_test_add_test.log
+-XLSTIME
+1607974332
+-XLKEEP
+-XLMODE
+./INCA_libs/run.lnx86.19.09.d
+-RUNMODE
+-CDSLIB
+./INCA_libs/run.lnx86.19.09.d/cds.lib
+-HDLVAR
+./INCA_libs/run.lnx86.19.09.d/hdl.var
+-XLNAME
+xrun
+-XLVERSION
+"TOOL:	xrun	19.09-s003"
+-XLNAME
+./INCA_libs/run.lnx86.19.09.d/cadence212_183204

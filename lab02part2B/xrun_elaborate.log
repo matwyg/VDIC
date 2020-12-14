@@ -1,4 +1,4 @@
-TOOL:	xrun	19.09-s003: Started on Dec 05, 2020 at 18:26:18 CET
+TOOL:	xrun	19.09-s003: Started on Dec 12, 2020 at 16:28:37 CET
 xrun
 	-elaborate
 	-l xrun_elaborate.log
@@ -22,7 +22,7 @@ xrun
 	-covfile xrun_covfile.txt
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
@@ -34,22 +34,22 @@ INCLUDE $PDK_DIR/cds/cds.lib
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xmelab: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xmelab: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 		Caching library 'worklib' ....... Done
 	Elaborating the design hierarchy:
 	Top level design units:
@@ -65,7 +65,7 @@ xmelab: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid envir
 	Generating native compiled code:
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xmvlog_cg: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xmvlog_cg: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 			streams:   7, words:  3972
 			streams:   9, words: 25661
 			streams:   7, words:  3321
@@ -103,4 +103,4 @@ xmvlog_cg: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid en
 		SV Class specializations:    4       4
 		Simulation timescale:      1ps
 	Writing initial simulation snapshot: worklib.top:sv
-TOOL:	xrun	19.09-s003: Exiting on Dec 05, 2020 at 18:26:18 CET  (total: 00:00:00)
+TOOL:	xrun	19.09-s003: Exiting on Dec 12, 2020 at 16:28:38 CET  (total: 00:00:01)

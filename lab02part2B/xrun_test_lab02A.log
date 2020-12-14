@@ -1,4 +1,4 @@
-TOOL:	xrun	19.09-s003: Started on Dec 05, 2020 at 18:26:18 CET
+TOOL:	xrun	19.09-s003: Started on Dec 12, 2020 at 16:28:38 CET
 xrun
 	-f dut.f
 		mtm_Alu.vp
@@ -22,7 +22,7 @@ xrun
 	-l xrun_test_lab02A.log
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
@@ -34,16 +34,16 @@ INCLUDE $PDK_DIR/cds/cds.lib
 xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xrun: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xrun: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 INCLUDE $PDK_DIR/cds/cds.lib
 |
-xmsim: *W,DLCVAR (/home/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
+xmsim: *W,DLCVAR (/student/mwygrzywalski/cds.lib,1): cds.lib Invalid environment variable ''.
 Loading snapshot worklib.top:sv .................... Done
 xcelium> source /cad/XCELIUM1909/tools/xcelium/files/xmsimrc
 xcelium> run
@@ -61,4 +61,4 @@ coverage setup:
 coverage files:
   model(design data) :  ./cov_work/scope/icc_1eeec123_2dbe88f0.ucm
   data               :  ./cov_work/scope/lab02A/icc_1eeec123_2dbe88f0.ucd
-TOOL:	xrun	19.09-s003: Exiting on Dec 05, 2020 at 18:26:19 CET  (total: 00:00:01)
+TOOL:	xrun	19.09-s003: Exiting on Dec 12, 2020 at 16:28:40 CET  (total: 00:00:02)
