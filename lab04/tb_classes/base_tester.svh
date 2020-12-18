@@ -39,7 +39,7 @@ virtual class base_tester extends uvm_component;
 		command.op_set_bit = 3'b111; //reset alu
         command_port.put(command);
 		#70
-		repeat (10) begin : random_loop
+		repeat (200) begin : random_loop
 			command.B = get_data();
 			command.A = get_data();
 			command.op_set_bit = get_op();
