@@ -1,0 +1,54 @@
+`timescale 1ns/1ps
+
+package mtm_Alu_pkg;
+   import uvm_pkg::*;
+`include "uvm_macros.svh"
+
+	typedef enum bit[2:0] {
+		AND = 3'b000,
+		OR = 3'b001,
+		ADD = 3'b100,
+		SUB = 3'b101,
+		RST = 3'b111
+	} op_t;
+
+	typedef enum bit [1:0] {DATA, CTL, ERR} byte_type_t;
+	typedef enum bit {BYTE_OK, BYTE_BAD} byte_status_t;
+
+	typedef struct packed {
+		bit [31:0] A;
+		bit [31:0] B;
+		bit [2:0] op_set_bit;
+		bit [2:0] err_flags;
+	} command_s;
+
+	typedef struct packed {
+		bit [31:0] C;
+		bit [3:0] flags;
+		bit [2:0] err_flags;
+	} result_s;
+
+	//configs
+	`include "env_config.svh"
+	`include "mtm_Alu_agent_config.svh"
+	
+	//transactions (command)
+	`include "random_command.svh"
+	`include "minmax_command.svh"
+	`include "result_command.svh"
+	
+	//testbench components
+	`include "coverage.svh"
+	`include "tester.svh"
+	`include "scoreboard.svh"
+	`include "driver.svh"
+	`include "command_monitor.svh"
+	`include "result_monitor.svh"
+	`include "mtm_Alu_agent.svh"
+	`include "env.svh"
+	
+
+	//tests
+	`include "dual_test.svh"
+
+endpackage : mtm_Alu_pkg
