@@ -1,0 +1,133 @@
+TOOL:	xrun	19.09-s003: Started on Feb 07, 2021 at 00:01:10 CET
+xrun
+	-f dut.f
+		mtm_Alu.vp
+	-f tb.f
+		mtm_Alu_pkg.sv
+		mtm_Alu_bfm.sv
+		top.sv
+		+incdir+tb_classes
+		+incdir+.
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	+nowarnXCLGNOPTM
+	+nowarnRNDXCELON
+	-xmlibdirname INCA_libs
+	+overwrite
+	-nocopyright
+	-coverage all
+	-covoverwrite
+	-covfile xrun_covfile.txt
+	-uvm
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+	-covtest random_test
+	-l xrun_test_random_test.log
+	+UVM_TESTNAME=random_test
+
+   User defined plus("+") options:
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+
+Loading snapshot worklib.top:sv .................... Done
+SVSEED default: 1
+xcelium> source /cad/XCELIUM1909/tools/xcelium/files/xmsimrc
+xcelium> source /cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/additions/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+----------------------------------------------------------------
+CDNS-UVM-1.1d (19.09-s003)
+(C) 2007-2013 Mentor Graphics Corporation
+(C) 2007-2013 Cadence Design Systems, Inc.
+(C) 2006-2013 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+----------------------------------------------------------------
+UVM_INFO @ 0: reporter [RNTST] Running test random_test...
+UVM_INFO @ 0: reporter [UVMTOP] UVM testbench topology:
+----------------------------------------------------------------
+Name                     Type                        Size  Value
+----------------------------------------------------------------
+uvm_test_top             random_test                 -     @2658
+  env_h                  env                         -     @2719
+    command_monitor_h    command_monitor             -     @3469
+      ap                 uvm_analysis_port           -     @3763
+    coverage_h           coverage                    -     @3579
+      analysis_imp       uvm_analysis_imp            -     @3628
+    drive_h              driver                      -     @3390
+      rsp_port           uvm_analysis_port           -     @3489
+      seq_item_port      uvm_seq_item_pull_port      -     @3440
+    result_monitor_h     result_monitor              -     @3549
+      ap                 uvm_analysis_port           -     @3823
+    scoreboard_h         scoreboard                  -     @3661
+      analysis_imp       uvm_analysis_imp            -     @3710
+      cmd_f              uvm_tlm_analysis_fifo #(T)  -     @3801
+        analysis_export  uvm_analysis_imp            -     @4097
+        get_ap           uvm_analysis_port           -     @4047
+        get_peek_export  uvm_get_peek_imp            -     @3951
+        put_ap           uvm_analysis_port           -     @3999
+        put_export       uvm_put_imp                 -     @3903
+    sequencer_h          uvm_sequencer               -     @2750
+      rsp_export         uvm_analysis_export         -     @2809
+      seq_item_export    uvm_seq_item_pull_imp       -     @3359
+      arbitration_queue  array                       0     -    
+      lock_queue         array                       0     -    
+      num_last_reqs      integral                    32    'd1  
+      num_last_rsps      integral                    32    'd1  
+----------------------------------------------------------------
+
+UVM_INFO tb_classes/random_sequence.svh(11) @ 0: uvm_test_top.env_h.sequencer_h@@random [SEQ_RANDOM] 
+        `uvm_rand_send_with(command, {command.op == RST;});
+                                                         |
+xmsim: *W,SVRNDF (./tb_classes/random_sequence.svh,13|57): The randomize method call failed. The unique id of the failed randomize call is 0.
+Observed simulation time : 0 FS + 43
+xmsim: *W,RNDOCS: These constraints contribute to the set of conflicting constraints:
+
+				 	op != RST;} (./tb_classes/sequence_item.svh,10)
+        `uvm_rand_send_with(command, {command.op == RST;}); (./tb_classes/random_sequence.svh,13)
+xmsim: *W,RNDOCS: These variables contribute to the set of conflicting constraints:
+
+rand variables:
+       op [./tb_classes/sequence_item.svh, 5] <AND=0, OR, ADD=4, SUB, RST=7> 
+
+UVM_WARNING tb_classes/random_sequence.svh(13) @ 0: uvm_test_top.env_h.sequencer_h@@random [RNDFLD] Randomization failed in uvm_rand_send_with action
+UVM_INFO /cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_objection.svh(1268) @ 198990000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    4
+UVM_WARNING :    1
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNDFLD]     1
+[RNTST]     1
+[SEQ_RANDOM]     1
+[TEST_DONE]     1
+[UVMTOP]     1
+Simulation complete via $finish(1) at time 198990 NS + 49
+/cad/XCELIUM1909/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_root.svh:457     $finish;
+xcelium> exit
+See ./cov_work/scope/random_test/icc.com file for message(s) on coverage constant object marking
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  top(top)
+  scope    :  scope
+  testname :  random_test
+
+coverage files:
+  model(design data) :  ./cov_work/scope/icc_72d0fc04_54596936.ucm
+  data               :  ./cov_work/scope/random_test/icc_72d0fc04_54596936.ucd
+TOOL:	xrun	19.09-s003: Exiting on Feb 07, 2021 at 00:01:10 CET  (total: 00:00:00)

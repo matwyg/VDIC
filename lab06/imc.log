@@ -1,0 +1,11 @@
+imc: *I,RUNLD: Successfully loaded run /home/student/mwygrzywalski/VDIC/lab06/cov_work/scope/merged_results.
+imc: *W,REPDEP: This is a legacy report and no future enhancement is planned for this report. It is recommended that you use the 'report_metrics' command and generate a dynamic report.
+name                                     Overall Average      Overall Covered      Code Average         Code Covered         Fsm Average          Fsm Covered          Functional Average   Functional Covered   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+uvm_pkg                                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+|--uvm_test_top                          n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+| |--env_h                               n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  n/a                  
+| | |--coverage_h                        100.00%              100.00% (40/40)      n/a                  n/a                  n/a                  n/a                  100.00%              100.00% (40/40)      
+top                                      100.00%              100.00% (2/2)        100.00%              100.00% (2/2)        n/a                  n/a                  n/a                  n/a                  
+|--bfm                                   56.53%               64.16% (111/173)     56.53%               64.16% (111/173)     n/a                  n/a                  n/a                  n/a                  
+|--DUT                                   3.57%                3.57% (2/56)         3.57%                3.57% (2/56)         n/a                  n/a                  n/a                  n/a                  

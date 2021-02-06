@@ -1,0 +1,183 @@
+TOOL:	xrun	19.09-s003: Started on Feb 07, 2021 at 00:01:06 CET
+xrun
+	-elaborate
+	-l xrun_elaborate.log
+	-f dut.f
+		mtm_Alu.vp
+	-f tb.f
+		mtm_Alu_pkg.sv
+		mtm_Alu_bfm.sv
+		top.sv
+		+incdir+tb_classes
+		+incdir+.
+	-v93
+	+nowarnDSEM2009
+	+nowarnDSEMEL
+	+nowarnCGDEFN
+	+nowarnXCLGNOPTM
+	+nowarnRNDXCELON
+	-xmlibdirname INCA_libs
+	+overwrite
+	-nocopyright
+	-coverage all
+	-covoverwrite
+	-covfile xrun_covfile.txt
+	-uvm
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+
+   User defined plus("+") options:
+	+UVM_NO_RELNOTES
+	+UVM_VERBOSITY=MEDIUM
+
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		uvm_pkg
+		cdns_uvmapi
+		cdns_assert2uvm_pkg
+		cdns_uvm_pkg
+		mtm_Alu_pkg
+		top
+
+	Extracting FSMs for coverage:
+		worklib.mtm_Alu
+		worklib.top
+	Total FSMs extracted = 0
+	Building instance overlay tables: ............
+		op = d[6:4];
+		     |
+xmelab: *W,ENUMERR (./mtm_Alu_bfm.sv,112|7): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+........ Done
+	Enabling instrumentation for coverage types: block expression FSM toggle functional
+	Generating native compiled code:
+			streams:   7, words:  3972
+			streams:   9, words: 25661
+			streams:   7, words:  3321
+		worklib.uvm_pkg:sv <0x12d6883c>
+			streams:   8, words:  5696
+		worklib.uvm_pkg:sv <0x24a5ac8e>
+			streams:   8, words:  5468
+		worklib.uvm_pkg:sv <0x15ae19b9>
+			streams:   7, words:  5029
+		worklib.uvm_pkg:sv <0x29fda5db>
+			streams:   7, words:  1505
+		worklib.uvm_pkg:sv <0x722b253a>
+			streams:   8, words:  2144
+		worklib.uvm_pkg:sv <0x20edd443>
+			streams:  22, words: 42172
+		worklib.uvm_pkg:sv <0x59697686>
+			streams:   7, words:  1505
+		worklib.uvm_pkg:sv <0x36eb3a56>
+			streams:   7, words:  2494
+		worklib.uvm_pkg:sv <0x76d7c698>
+			streams:   7, words:  2494
+		worklib.uvm_pkg:sv <0x6676673a>
+			streams:   9, words:  3597
+		worklib.uvm_pkg:sv <0x3374fb18>
+			streams:  28, words: 20537
+		worklib.uvm_pkg:sv <0x4fa083b4>
+			streams:  27, words: 19508
+		worklib.uvm_pkg:sv <0x5938541c>
+			streams:  23, words: 19113
+		worklib.uvm_pkg:sv <0x2918f830>
+			streams:  14, words:  4567
+		worklib.uvm_pkg:sv <0x0cbbf00e>
+			streams:  26, words: 27426
+		worklib.uvm_pkg:sv <0x4ae0037b>
+			streams:   7, words:  1944
+		worklib.uvm_pkg:sv <0x68d04ab6>
+			streams:  14, words: 12074
+		worklib.uvm_pkg:sv <0x4fb36540>
+			streams:  26, words: 22997
+		worklib.uvm_pkg:sv <0x0bb99696>
+			streams:  25, words: 42088
+		worklib.uvm_pkg:sv <0x5c20d9cf>
+			streams:  27, words: 25337
+		worklib.uvm_pkg:sv <0x65e37691>
+			streams:  26, words: 36821
+		worklib.uvm_pkg:sv <0x32e8cab4>
+			streams:  27, words: 27296
+		worklib.uvm_pkg:sv <0x6b107c19>
+			streams:  25, words: 38900
+		worklib.uvm_pkg:sv <0x2c041824>
+			streams:  27, words: 28920
+		worklib.uvm_pkg:sv <0x0fa6b5b7>
+			streams:  25, words: 44022
+		worklib.uvm_pkg:sv <0x3142692e>
+			streams:  27, words: 32537
+		worklib.uvm_pkg:sv <0x5ef76854>
+			streams:  25, words: 39636
+		worklib.uvm_pkg:sv <0x1ac8daf1>
+			streams:  25, words: 42190
+		worklib.uvm_pkg:sv <0x3c3009e6>
+			streams:  27, words: 26894
+		worklib.uvm_pkg:sv <0x2e4886ef>
+			streams:  25, words: 38605
+		worklib.uvm_pkg:sv <0x5eb6c094>
+			streams:  28, words: 62252
+		worklib.uvm_pkg:sv <0x31f59053>
+			streams:  59, words: 61232
+		worklib.cdns_uvm_pkg:sv <0x60d24ca5>
+			streams:  27, words: 28602
+		worklib.cdns_uvm_pkg:sv <0x5927caad>
+			streams:   8, words:  3059
+		worklib.cdns_uvm_pkg:sv <0x321024d5>
+			streams:  10, words:  7067
+		worklib.uvm_pkg:sv <0x7d8bfb5b>
+			streams:  23, words: 15827
+		worklib.uvm_pkg:sv <0x382018f2>
+			streams:  23, words: 15827
+		worklib.mtm_Alu_pkg:sv <0x406ecf6a>
+			streams:   8, words:  3187
+		worklib.uvm_pkg:sv <0x569ecdf3>
+			streams:   7, words:  2494
+		worklib.uvm_pkg:sv <0x2223c849>
+			streams:  24, words: 17721
+		worklib.uvm_pkg:sv <0x403423b9>
+			streams:  46, words: 31231
+		worklib.uvm_pkg:sv <0x658c0d5a>
+			streams:  42, words: 25258
+		worklib.uvm_pkg:sv <0x1d4f8952>
+			streams:  53, words: 31331
+		worklib.uvm_pkg:sv <0x26a6a2e1>
+			streams:  25, words: 26213
+		worklib.uvm_pkg:sv <0x757a5ba9>
+			streams:  33, words: 31477
+		worklib.mtm_Alu_bfm:sv <0x2c6327ee>
+			streams: 205, words: 240458
+		worklib.uvm_pkg:sv <0x060e0913>
+			streams:  28, words: 21820
+		worklib.mtm_Alu_pkg:sv <0x525477a2>
+			streams: 301, words: 283895
+		worklib.cdns_uvm_pkg:sv <0x478016fc>
+			streams: 134, words: 201094
+		worklib.cdns_uvmapi:svp <0x636fadcb>
+			streams:  27, words: 25320
+		worklib.cdns_assert2uvm_pkg:sv <0x6a11e84c>
+			streams:   3, words:  1805
+		worklib.uvm_pkg:sv <0x10e2b364>
+			streams: 4440, words: 5679361
+	Building instance specific data structures.
+	Performing constant object marking (COM) analysis.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                       Instances  Unique
+		Modules:                       5       5
+		Interfaces:                    1       1
+		Verilog packages:              5       5
+		Registers:                 14280   10367
+		Scalar wires:                  7       -
+		Vectored wires:                2       -
+		Named events:                  4      12
+		Always blocks:                12      12
+		Initial blocks:              296     161
+		Parallel blocks:              26      27
+		Pseudo assignments:            3       3
+		Assertions:                    2       2
+		Covergroup Instances:          0       3
+		SV Class declarations:       204     316
+		SV Class specializations:    397     397
+		Simulation timescale:        1ps
+	Writing initial simulation snapshot: worklib.top:sv
+TOOL:	xrun	19.09-s003: Exiting on Feb 07, 2021 at 00:01:10 CET  (total: 00:00:04)
